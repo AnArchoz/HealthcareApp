@@ -5,7 +5,7 @@ import java.sql.Statement;
 
 public class dbo {
     public static void main(String[] args) {
-        String url = "jdbc:sqlserver://localhost\\sqlexpress;databaseName=school";
+        String url = "jdbc:sqlserver://localhost\\MSSQLSERVER;databaseName=master";
         String user = "sa";
         String password = "Hej12345";
 
