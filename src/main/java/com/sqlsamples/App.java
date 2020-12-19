@@ -18,6 +18,7 @@ public class App {
                System.out.println("connection successful");
                Statement st = conn.createStatement();
                st.executeUpdate("INSERT INTO doctor VALUES (3, 'ant', 'man', 2, 12345)" );
+               hej
            }
         } catch (Exception e) {
             System.out.println();
