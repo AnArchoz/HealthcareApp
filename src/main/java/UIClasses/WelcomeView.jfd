@@ -1,0 +1,24 @@
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq t {space :p:94:p, comp signupBTN:::p::p, space :p:57:p, comp LoginBTN:::p::p, space ::93:x}}"
+			"$verticalGroup": "par l {seq t {space ::197:x, par b {comp signupBTN::b:p::p, comp LoginBTN::b:p::p}, space :p:73:p}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "LoginBTN"
+				"text": "LOGIN"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "signupBTN"
+				"text": "SIGN UP"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}
