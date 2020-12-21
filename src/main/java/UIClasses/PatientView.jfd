@@ -1,0 +1,124 @@
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq t {par t {seq l {space :p:42:p, par t {comp label10::l:p::p, comp comboBox1::l:p:136:p, seq l {par l {comp label12::l:p::p, comp label11::l:p::p, comp textField6::l:p:110:p, comp button1:::p::p, comp textField4::l:p::p}, space :::p, par l {seq {comp scrollPane1:::p:161:p, space :::p, comp button3:::p::p}, seq {comp scrollPane2:::p:99:p, space :::p, par l {comp comboBox2:::p::p, comp label13:::p::p, comp button2:::p::p}}}}, seq l {comp label9:::p::p, space :p:111:p, comp label2:::p::p}, comp textField3::l:p::p, seq l {par l {comp textField1::l:p::p, comp label6::l:p::p}, space :::p, par l {comp label7:::p::p, comp textField2:::p::p}}, comp label8::l:p::p}, space :0:0:x}, seq {space :::x, par t {seq t {comp label4:::p::p, space :p:87:p, par l {comp textField5:::p::p, comp label1:::p:142:p, seq {space :6:6:p, comp label3:::p::p}}}, seq t {par t {comp label5:::p::p, comp passwordField1:::p:100:p}, space :p:71:p}}}}, space :p:60:p}}"
+			"$verticalGroup": "par l {seq l {space s:::p, par b {comp label4::b:p::p, comp label1::b:p::p}, space :::p, par l {par b {comp label6::b:p::p, comp label7::b:p::p}, comp label3::t:p::p}, space :::p, par l {seq {par b {comp textField1::b:p::p, comp textField2::b:p::p}, space u:::p}, seq t {comp textField5:::p::p, space :p:4:p}}, par l {seq {comp label8:::p::p, space :::p, comp textField3:::p::p}, seq t {space :p:8:p, comp label5:::p::p, space :::x, comp passwordField1:::p::p}}, space :::p, par b {comp label9::b:p::p, comp label2::b:p::p}, par l {seq {space :::p, par l {comp textField4:::p::p, comp scrollPane1:::p:45:p}}, seq l {space :p:16:p, comp button3:::p::p}}, space :p:18:p, comp label10:::p::p, space :::p, comp comboBox1:::p:47:p, space s:::p, par l {comp scrollPane2::l::159:x, seq {par l {seq {comp label11:::p::p, space :::p, comp textField6:::p::p, space s:::p, comp label12:::p::p, space :::p, comp button1:::p::p}, seq l {comp label13:::p::p, space :::p, comp comboBox2:::p::p, space :p:37:p, comp button2:::p::p}}, space ::37:x}}}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Patient name"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField1"
+				"text": "First name"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField2"
+				"text": "Last name"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField3"
+				"text": "Gender"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTextPane" ) {
+					name: "textPane1"
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "Address"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField4"
+				"text": "Phone Number"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField5"
+				"text": "Birth date"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "yyyy-mm-dd"
+			} )
+			add( new FormComponent( "javax.swing.JPasswordField" ) {
+				name: "passwordField1"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": "Registration date"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label5"
+				"text": "Password - 6 digits"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label6"
+				"text": "First name"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label7"
+				"text": "Last name"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label8"
+				"text": "Gender - 1 character"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label9"
+				"text": "Phone number"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "comboBox1"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label10"
+				"text": "List of doctors"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label11"
+				"text": "Search specialisation"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane2"
+				add( new FormComponent( "javax.swing.JList" ) {
+					name: "list1"
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField6"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "See available times"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label12"
+				"text": "Selected doctor"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "comboBox2"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label13"
+				"text": "Available times"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "Make appointment"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button3"
+				"text": "Save info"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 450, 485 )
+		} )
+	}
+}

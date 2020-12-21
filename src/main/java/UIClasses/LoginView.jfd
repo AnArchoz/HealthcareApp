@@ -1,0 +1,47 @@
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq t {space ::69:x, comp doctorRadioBtn:::p::p, space :p:28:p, par t {comp loginLabel:::p:63:p, comp patientRadioBtn::t:p::p}, space s:::p, comp adminRadioBtn:::p::p, space :p:99:p}, seq l {space :p:127:p, par l:::p {comp usernameField::::177:x, comp passwordField::t:::x, comp passwordLabel::t::177:x, comp usernameLabel::t::177:x}, space ::91:x}}"
+			"$verticalGroup": "par l {seq l {space :p:53:p, comp loginLabel:::p:22:p, space u:::p, par b {comp adminRadioBtn::b:p::p, comp patientRadioBtn::b:p::p, comp doctorRadioBtn::b:p::p}, space :p:34:p, comp usernameLabel:::p::p, space :::p, comp usernameField:::p::p, space s:::p, comp passwordLabel:::p::p, space :::p, comp passwordField:::p::p, space ::37:x}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "adminRadioBtn"
+				"text": "Admin"
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "patientRadioBtn"
+				"text": "Patient"
+			} )
+			add( new FormComponent( "javax.swing.JRadioButton" ) {
+				name: "doctorRadioBtn"
+				"text": "Doctor"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "loginLabel"
+				"text": "Log in as:"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "usernameField"
+				"toolTipText": "Password LMAO"
+			} )
+			add( new FormComponent( "javax.swing.JPasswordField" ) {
+				name: "passwordField"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "usernameLabel"
+				"text": "ID/Username - 6 digits"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "passwordLabel"
+				"text": "Passcode/Password - 6 digits"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 395, 300 )
+		} )
+	}
+}

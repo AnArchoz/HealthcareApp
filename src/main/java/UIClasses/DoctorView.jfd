@@ -1,0 +1,65 @@
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq l {space :p:24:p, par t {comp addMedicalRecord:::p::p, seq {par l {comp scrollPane1::l:p:139:p, comp patientBookingLabel::l:p::p}, space :p:51:p, par l {comp vacationLabel:::p::p, comp scrollPane2:::p:146:p}}}}, seq l {par l {seq l {space :p:32:p, par l:::p {comp unavailableBtn:::p:160:p, seq {comp weekdayBox:::p::p, space :::x, comp timeBox:::p::p}}}, seq l {space :p:48:p, comp weekdayLabel:::p::p, space :p:47:p, comp timeLabel:::p::p}}, space :p:59:p, par l {comp patientListBox:::p::p, seq t {comp patientListLabel:::p::p, space :p:14:p}}}}, space ::40:x}}"
+			"$verticalGroup": "par l {seq l {space :p:3:p, par b {comp timeLabel::b:p::p, comp weekdayLabel::b:p::p, comp patientListLabel::b:p::p}, space :::p, par b {comp weekdayBox::b:p::p, comp timeBox::b:p::p, comp patientListBox::b:p::p}, space :::p, par b {comp unavailableBtn::b:p::p, comp addMedicalRecord::b:p::p}, space :p:42:p, par b {comp patientBookingLabel::b:p::p, comp vacationLabel::b:p::p}, space :p:1:p, par l:::p {comp scrollPane2::::116:x, comp scrollPane1::::116:x}, space ::34:x}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "weekdayBox"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "timeBox"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "unavailableBtn"
+				"text": "Make unavailable"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JList" ) {
+					name: "bookingsList"
+				} )
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane2"
+				add( new FormComponent( "javax.swing.JList" ) {
+					name: "vacationList"
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "patientBookingLabel"
+				"text": "Patient bookings"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "vacationLabel"
+				"text": "Vacation days"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "weekdayLabel"
+				"text": "Weekday"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "timeLabel"
+				"text": "Time"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "patientListBox"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "addMedicalRecord"
+				"text": "Add Medical Record"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "patientListLabel"
+				"text": "Patient list"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}
