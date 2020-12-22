@@ -1,3 +1,2 @@
-.idea/
-**/*.class
-
+# Project exclude paths
+/out/
