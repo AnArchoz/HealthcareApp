@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {par l {seq l {space :p:49:p, par l {par t:l::p {comp scrollPane1::l::105:x, comp descLabel::l:p::p, comp scrollPane2::l::105:x}, comp diagLabel::l:p::p}, space :p:57:p, par l {comp drugLabel:::p::p, comp scrollPane3:::p:104:p, comp button1::l:p::p}}, seq l {space :p:107:p, comp patNameLabel:::p::p, space :p:43:p, comp dateLabel:::p::p}}, space ::78:x}}"
-			"$verticalGroup": "par l {seq l {space :::x, par b {comp dateLabel::b:p::p, comp patNameLabel::b:p::p}, space ::10:x, par b {comp descLabel::b:p::p, comp drugLabel::b:p::p}, space :::p, par l {comp scrollPane2:::p:81:p, comp scrollPane3:::p:81:p}, space ::25:x, par l {seq {comp diagLabel:::p::p, space :::p, comp scrollPane1:::p:81:p}, seq l {space :p:37:p, comp button1:::p::p}}, space :p:37:p}}"
+			"$horizontalGroup": "par l {seq {par l {seq l {space :p:49:p, par l {par t:l::p {comp scrollPane1::l::105:x, comp descLabel::l:p::p, comp scrollPane2::l::105:x}, comp diagLabel::l:p::p}, space :p:57:p, par l {comp drugLabel:::p::p, comp scrollPane3:::p:104:p, comp saveRecordBtn::l:p::p}}, seq l {space :p:107:p, comp patNameLabel:::p::p, space :p:43:p, comp dateLabel:::p::p}}, space ::78:x}}"
+			"$verticalGroup": "par l {seq l {space :::x, par b {comp dateLabel::b:p::p, comp patNameLabel::b:p::p}, space ::10:x, par b {comp descLabel::b:p::p, comp drugLabel::b:p::p}, space :::p, par l {comp scrollPane2:::p:81:p, comp scrollPane3:::p:81:p}, space ::25:x, par l {seq {comp diagLabel:::p::p, space :::p, comp scrollPane1:::p:81:p}, seq l {space :p:37:p, comp saveRecordBtn:::p::p}}, space :p:37:p}}"
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -47,8 +47,9 @@ new FormModel {
 				"text": "Current date"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button1"
+				name: "saveRecordBtn"
 				"text": "SAVE RECORD"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "saveRecord", true ) )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

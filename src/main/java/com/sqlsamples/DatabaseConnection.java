@@ -14,11 +14,11 @@ public class DatabaseConnection {
             // Load SQL Server JDBC driver and establish connection.
             System.out.print("Connecting to SQL Server ... ");
             Connection conn = DriverManager.getConnection(connectionUrl);
-           if (conn != null){
-               System.out.println("connection successful");
-               Statement st = conn.createStatement();
-               st.executeUpdate("INSERT INTO doctor VALUES (133, 'ant', 'man', 'PW', 2, 12345)" );
-           }
+            if (conn != null) {
+                System.out.println("connection successful");
+                Statement st = conn.createStatement();
+                st.executeUpdate("INSERT INTO doctor VALUES (133, 'ant', 'man', 'PW', 2, 12345)");
+            }
         } catch (Exception e) {
             System.out.println();
             e.printStackTrace();

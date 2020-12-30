@@ -17,6 +17,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "unavailableBtn"
 				"text": "Make unavailable"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "makeDateUnavailable", true ) )
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
@@ -52,6 +53,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "addMedicalRecord"
 				"text": "Add Medical Record"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addMedicalRecord", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "patientListLabel"
