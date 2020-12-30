@@ -5,7 +5,7 @@ public class Doctor {
     private String firstName;
     private String lastName;
     private String specialisation;
-    private int pw;
+    private String pw;
 
     public int getId() {
         return id;
@@ -39,15 +39,15 @@ public class Doctor {
         this.specialisation = specialisation;
     }
 
-    public int getPw() {
+    public String getPw() {
         return pw;
     }
 
-    public void setPw(int pw) {
+    public void setPw(String pw) {
         this.pw = pw;
     }
 
-    public Doctor(int id, String firstName, String lastName, String specialisation, int pw) {
+    public Doctor(int id, String firstName, String lastName, String specialisation, String pw) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

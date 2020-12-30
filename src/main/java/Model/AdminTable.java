@@ -2,9 +2,9 @@ package Model;
 
 public class AdminTable {
     private int adminId;
-    private int adminPw;
+    private String adminPw;
 
-    public AdminTable(int adminId, int adminPw) {
+    public AdminTable(int adminId, String adminPw) {
         this.adminId = adminId;
         this.adminPw = adminPw;
     }
@@ -17,11 +17,11 @@ public class AdminTable {
         this.adminId = adminId;
     }
 
-    public int getAdminPw() {
+    public String getAdminPw() {
         return adminPw;
     }
 
-    public void setAdminPw(int adminPw) {
+    public void setAdminPw(String adminPw) {
         this.adminPw = adminPw;
     }
 }
