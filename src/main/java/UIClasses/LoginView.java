@@ -5,7 +5,7 @@
 package UIClasses;
 
 import javax.swing.*;
-import javax.swing.GroupLayout;
+import java.awt.event.ActionEvent;
 
 /**
  * @author unknown
@@ -13,6 +13,16 @@ import javax.swing.GroupLayout;
 public class LoginView extends JPanel {
     public LoginView() {
         initComponents();
+    }
+
+    private void login(ActionEvent e) {
+        if (patientRadioBtn.isSelected()) {
+            //TODO: patient login
+        } else if (doctorRadioBtn.isSelected()){
+            //TODO: doctor login
+        } else if (adminRadioBtn.isSelected()){
+            //TODO: admin login
+        }
     }
 
     private void initComponents() {
@@ -26,15 +36,14 @@ public class LoginView extends JPanel {
         passwordField = new JPasswordField();
         usernameLabel = new JLabel();
         passwordLabel = new JLabel();
+        loginBtn = new JButton();
 
         //======== this ========
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
-        . swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing
-        . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
-        Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
-        ) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
-        public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName (
-        ) )) throw new RuntimeException( ); }} );
+        setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder (
+        0, 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder
+        . BOTTOM, new java. awt .Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,12 ) ,java . awt. Color .
+        red ) , getBorder () ) );  addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java .
+        beans. PropertyChangeEvent e) { if( "\u0062or\u0064er" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
 
         //---- adminRadioBtn ----
         adminRadioBtn.setText("Admin");
@@ -57,6 +66,10 @@ public class LoginView extends JPanel {
         //---- passwordLabel ----
         passwordLabel.setText("Passcode/Password - 6 digits");
 
+        //---- loginBtn ----
+        loginBtn.setText("LOG IN");
+        loginBtn.addActionListener(e -> login(e));
+
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,13 +85,18 @@ public class LoginView extends JPanel {
                     .addComponent(adminRadioBtn)
                     .addGap(99, 99, 99))
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(127, 127, 127)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                        .addComponent(usernameField, GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                        .addComponent(passwordField, GroupLayout.Alignment.TRAILING)
-                        .addComponent(passwordLabel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                        .addComponent(usernameLabel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))
-                    .addContainerGap(91, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup()
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(100, 100, 100)
+                            .addGroup(layout.createParallelGroup()
+                                .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(usernameField, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(usernameLabel, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(passwordLabel, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(149, 149, 149)
+                            .addComponent(loginBtn)))
+                    .addContainerGap(118, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup()
@@ -90,16 +108,24 @@ public class LoginView extends JPanel {
                         .addComponent(adminRadioBtn)
                         .addComponent(patientRadioBtn)
                         .addComponent(doctorRadioBtn))
-                    .addGap(34, 34, 34)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(usernameLabel)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(usernameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(passwordLabel)
                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(37, Short.MAX_VALUE))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(loginBtn)
+                    .addContainerGap(29, Short.MAX_VALUE))
         );
+
+        //---- radioBtnGroup ----
+        ButtonGroup radioBtnGroup = new ButtonGroup();
+        radioBtnGroup.add(adminRadioBtn);
+        radioBtnGroup.add(patientRadioBtn);
+        radioBtnGroup.add(doctorRadioBtn);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -113,5 +139,6 @@ public class LoginView extends JPanel {
     private JPasswordField passwordField;
     private JLabel usernameLabel;
     private JLabel passwordLabel;
+    private JButton loginBtn;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
