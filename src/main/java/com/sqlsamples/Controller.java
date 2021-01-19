@@ -48,7 +48,7 @@ public class Controller {
                 frame.add(signupView, BorderLayout.CENTER);
                 break;
             case "patient":
-                patientView = new PatientView(this,(Patient) user);
+                patientView = new PatientView(this, (Patient) user);
                 frame.setSize(450, 500);
                 frame.add(patientView, BorderLayout.CENTER);
                 break;
@@ -58,7 +58,7 @@ public class Controller {
                 frame.add(doctorView, BorderLayout.CENTER);
                 break;
             case "admin":
-                adminView = new AdminView(this,(AdminTable) user);
+                adminView = new AdminView(this, (AdminTable) user);
                 frame.setSize(600, 400);
                 frame.add(adminView, BorderLayout.CENTER);
                 break;
@@ -70,5 +70,9 @@ public class Controller {
         }
         frame.revalidate();
         frame.repaint();
+    }
+
+    public void testProcedure() {
+        System.out.println(DatabaseConnection.getAppointment(1).toString());
     }
 }

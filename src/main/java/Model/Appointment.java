@@ -1,15 +1,27 @@
 package Model;
 
 import java.security.Timestamp;
+import java.sql.Date;
 
 public class Appointment {
     private int appId;
     private int patientId;
     private int doctorId;
     private String appDate;
-    private Timestamp bookTime;
+    private Date bookTime;
 
-    public Appointment(int appId, int patientId, int doctorId, String appDate, Timestamp bookTime) {
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "appId=" + appId +
+                ", patientId=" + patientId +
+                ", doctorId=" + doctorId +
+                ", appDate='" + appDate + '\'' +
+                ", bookTime=" + bookTime +
+                '}';
+    }
+
+    public Appointment(int appId, int patientId, int doctorId, String appDate, Date bookTime) {
         this.appId = appId;
         this.patientId = patientId;
         this.doctorId = doctorId;
@@ -49,11 +61,11 @@ public class Appointment {
         this.appDate = appDate;
     }
 
-    public Timestamp getBookTime() {
+    public Date getBookTime() {
         return bookTime;
     }
 
-    public void setBookTime(Timestamp bookTime) {
+    public void setBookTime(Date bookTime) {
         this.bookTime = bookTime;
     }
 }
