@@ -81,6 +81,22 @@ public class Patient {
         return birthDate;
     }
 
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "patientId=" + patientId +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", gender='" + gender + '\'' +
+                ", address='" + address + '\'' +
+                ", phone=" + phone +
+                ", birthDate=" + birthDate +
+                ", regDay='" + regDay + '\'' +
+                ", password='" + password + '\'' +
+                ", totalCost=" + totalCost +
+                '}';
+    }
+
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }

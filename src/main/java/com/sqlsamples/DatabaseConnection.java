@@ -1,6 +1,7 @@
 package com.sqlsamples;
 
 import Model.AdminTable;
+import Model.Appointment;
 import Model.Doctor;
 import Model.Patient;
 
@@ -116,5 +117,68 @@ public class DatabaseConnection {
         }
 
         return admin;
+    }
+
+    public static Patient getPatientInfo(int id) {
+        String query = "EXECUTE getPatient @pat_id =? ";
+        Patient patient = null;
+
+        try {
+            CallableStatement cs = conn.prepareCall(query);
+            cs.setInt(1, id);
+
+            ResultSet results = cs.executeQuery();
+
+            if (!results.next()) {
+                JOptionPane.showMessageDialog(null, "Wrong username and/or password!");
+                return null;
+            } else {
+                String firstname = results.getString(1);
+                String lastname = results.getString(2);
+                Date birthDate = results.getDate(3);
+
+                patient = new Patient(id, firstname, lastname, null, null,
+                        1231293, birthDate, null, null, 0);
+            }
+
+            results.close();
+            cs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return patient;
+    }
+
+    public static Appointment getAppointment(int id) {
+        String query = "EXECUTE getAppointment @app_id =? ";
+        Appointment app = null;
+
+        try {
+            CallableStatement cs = conn.prepareCall(query);
+            cs.setInt(1, id);
+
+            ResultSet results = cs.executeQuery();
+
+            if (!results.next()) {
+                JOptionPane.showMessageDialog(null, "Wrong username and/or password!");
+                return null;
+            } else {
+                int pat_id = results.getInt(1);
+                int dr_id = results.getInt(2);
+                String app_date = results.getString(3);
+                Timestamp bookTime = results.getTimestamp(4);
+                Date date = new Date(bookTime.getTime());
+
+                app = new Appointment(id, pat_id, dr_id, app_date, date);
+            }
+
+            results.close();
+            cs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return app;
     }
 }

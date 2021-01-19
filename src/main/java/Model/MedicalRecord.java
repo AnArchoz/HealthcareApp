@@ -75,4 +75,17 @@ public class MedicalRecord {
     public void setDrugs(String drugs) {
         this.drugs = drugs;
     }
+
+    @Override
+    public String toString() {
+        return "MedicalRecord{" +
+                "patientId=" + patientId +
+                ", doctorId=" + doctorId +
+                ", mrAppId=" + mrAppId +
+                ", appDate='" + appDate + '\'' +
+                ", diagnosis='" + diagnosis + '\'' +
+                ", description='" + description + '\'' +
+                ", drugs='" + drugs + '\'' +
+                '}';
+    }
 }
