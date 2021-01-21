@@ -3,13 +3,16 @@ package com.sqlsamples;
 import Model.AdminTable;
 import Model.Doctor;
 import Model.Patient;
+import Model.Spec_list;
 import UIClasses.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Controller {
     private Doctor doctor;
+    private ArrayList<Spec_list> specList;
     JFrame frame;
     LoginView loginView;
     AdminView adminView;
@@ -31,6 +34,7 @@ public class Controller {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(welcomeView, BorderLayout.CENTER);
         frame.setVisible(true);
+
     }
 
     public void openView(String view, Object user) {
@@ -58,7 +62,8 @@ public class Controller {
                 frame.add(doctorView, BorderLayout.CENTER);
                 break;
             case "admin":
-                adminView = new AdminView(this, (AdminTable) user);
+                specList = DatabaseConnection.getSpecialisations();
+                adminView = new AdminView(this, (AdminTable) user, specList);
                 frame.setSize(600, 400);
                 frame.add(adminView, BorderLayout.CENTER);
                 break;
@@ -74,5 +79,9 @@ public class Controller {
 
     public void testProcedure() {
         System.out.println(DatabaseConnection.getAppointment(1).toString());
+    }
+
+    public void addSpec(Spec_list spec) {
+        DatabaseConnection.addSpecialisation(spec);
     }
 }

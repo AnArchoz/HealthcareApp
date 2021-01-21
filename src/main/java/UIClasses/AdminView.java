@@ -11,14 +11,17 @@ import com.sqlsamples.Controller;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class AdminView extends JPanel {
     private Controller controller;
     private AdminTable admin;
+    private ArrayList<Spec_list> specList;
 
-    public AdminView(Controller controller, AdminTable admin) {
+    public AdminView(Controller controller, AdminTable admin, ArrayList<Spec_list> specList) {
         this.controller = controller;
         this.admin = admin;
+        this.specList = specList;
         initComponents();
     }
 
@@ -29,9 +32,10 @@ public class AdminView extends JPanel {
         int cost = Integer.parseInt(addCostField.getText());
         addCostField.setText("");
 
-        Spec_list specialisation = new Spec_list(spec, cost);
+        Spec_list specialisation = new Spec_list(spec, null, cost);
 
-        //DatabaseConnection.addSpecialisation(specialisation);
+        controller.addSpec(specialisation);
+        chooseSpecBox.addItem(specialisation.getSpecialisation());
     }
 
     private void addDoctor(ActionEvent e) {
@@ -76,11 +80,16 @@ public class AdminView extends JPanel {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - unknown
-        addSpecField = new JTextField();
+        // Generated using JFormDesigner Evaluation license - Patrick Andersson
         addCostField = new JTextField();
+        addSpecField = new JTextField();
         addDoctorField = new JTextField();
-        chooseSpecBox = new JComboBox();
+        DefaultComboBoxModel dml = new DefaultComboBoxModel();
+        for (Spec_list spec_list : specList) {
+            dml.addElement(spec_list.getSpecialisation());
+        }
+        chooseSpecBox = new JComboBox<String>();
+        chooseSpecBox.setModel(dml);
         firstnameField = new JTextField();
         surnameField = new JTextField();
         doctorPasswordField = new JTextField();
@@ -105,16 +114,17 @@ public class AdminView extends JPanel {
         appPatientList = new JList();
 
         //======== this ========
-        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder
-                (0, 0, 0, 0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax.swing.border.TitledBorder.CENTER, javax.swing.border
-                .TitledBorder.BOTTOM, new java.awt.Font("Dia\u006cog", java.awt.Font.BOLD, 12), java.awt
+        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new
+                javax.swing.border.EmptyBorder(0, 0, 0, 0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax
+                .swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BOTTOM, new java
+                .awt.Font("Dia\u006cog", java.awt.Font.BOLD, 12), java.awt
                 .Color.red), getBorder()));
-        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        addPropertyChangeListener(new java.beans.
+                PropertyChangeListener() {
             @Override
-            public void
-            propertyChange(java.beans.PropertyChangeEvent e) {
-                if ("bord\u0065r".equals(e.getPropertyName())) throw new RuntimeException()
-                        ;
+            public void propertyChange(java.beans.PropertyChangeEvent e) {
+                if ("\u0062ord\u0065r".
+                        equals(e.getPropertyName())) throw new RuntimeException();
             }
         });
 
@@ -186,9 +196,9 @@ public class AdminView extends JPanel {
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addGroup(layout.createParallelGroup()
                                                                         .addGroup(layout.createSequentialGroup()
-                                                                                .addComponent(addCostField, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(addSpecField, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
                                                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                                                .addComponent(addSpecField, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
+                                                                                .addComponent(addCostField, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
                                                                         .addComponent(addSpecLabel, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE))
                                                                 .addGap(79, 79, 79)
                                                                 .addGroup(layout.createParallelGroup()
@@ -248,8 +258,8 @@ public class AdminView extends JPanel {
                                                 .addGap(20, 20, 20)
                                                 .addComponent(addSpecLabel)
                                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(addCostField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(addSpecField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                                        .addComponent(addSpecField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(addCostField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(addSpecBtn)
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -302,9 +312,9 @@ public class AdminView extends JPanel {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - unknown
-    private JTextField addSpecField;
+    // Generated using JFormDesigner Evaluation license - Patrick Andersson
     private JTextField addCostField;
+    private JTextField addSpecField;
     private JTextField addDoctorField;
     private JComboBox chooseSpecBox;
     private JTextField firstnameField;

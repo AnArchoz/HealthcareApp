@@ -1,12 +1,10 @@
 package com.sqlsamples;
 
-import Model.AdminTable;
-import Model.Appointment;
-import Model.Doctor;
-import Model.Patient;
+import Model.*;
 
 import javax.swing.*;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseConnection {
     private static Connection conn;
@@ -94,7 +92,7 @@ public class DatabaseConnection {
     }
 
     public static AdminTable checkAdminLogin(int id, String password) {
-        String query = "SELECT * FROM ADMINTABLE WHERE a_id=? AND ad_pw=?";
+        String query = "SELECT * FROM ADMIN_TABLE WHERE a_id=? AND ad_pw=?";
         AdminTable admin = null;
 
         try {
@@ -180,5 +178,51 @@ public class DatabaseConnection {
         }
 
         return app;
+    }
+
+    public static void addSpecialisation(Spec_list specialisation) {
+        String query = "INSERT INTO spec_list VALUES (?,?,?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            System.out.println("TEST SPEC=" + specialisation.getSpecialisation() + specialisation.getSpecPrice());
+            ps.setString(1, specialisation.getSpecialisation());
+            ps.setNull(2, Types.NULL);
+            ps.setInt(3, specialisation.getSpecPrice());
+
+            ps.execute();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<Spec_list> getSpecialisations() {
+        String query = "SELECT * FROM spec_list;";
+        ArrayList<Spec_list> speclist = new ArrayList<Spec_list>();
+        Spec_list specIndividual = null;
+
+        try {
+            PreparedStatement ps = conn.prepareCall(query);
+            ResultSet results = ps.executeQuery();
+            while (results.next()) {
+
+                String specName = results.getString(1);
+                int doctorId = results.getInt(2);
+                int specPrice = results.getInt(3);
+
+                specIndividual = new Spec_list(specName, null, specPrice);
+                speclist.add(specIndividual);
+            }
+
+            for (Spec_list spec : speclist) {
+                System.out.println(spec.getSpecialisation());
+            }
+            results.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return speclist;
     }
 }

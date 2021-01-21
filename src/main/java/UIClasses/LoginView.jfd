@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9.1" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -36,11 +36,11 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "usernameLabel"
-				"text": "ID/Username - 6 digits"
+				"text": "ID/Username/MedID"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "passwordLabel"
-				"text": "Passcode/Password - 6 digits"
+				"text": "Passcode/Password - 8 digits"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "loginBtn"
