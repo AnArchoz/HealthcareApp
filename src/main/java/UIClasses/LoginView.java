@@ -50,7 +50,7 @@ public class LoginView extends JPanel {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - unknown
+        // Generated using JFormDesigner Evaluation license - Patrick Andersson
         adminRadioBtn = new JRadioButton();
         patientRadioBtn = new JRadioButton();
         doctorRadioBtn = new JRadioButton();
@@ -62,17 +62,12 @@ public class LoginView extends JPanel {
         loginBtn = new JButton();
 
         //======== this ========
-        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(
-                0, 0, 0, 0), "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder
-                .BOTTOM, new java.awt.Font("D\u0069al\u006fg", java.awt.Font.BOLD, 12), java.awt.Color.
-                red), getBorder()));
-        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            @Override
-            public void propertyChange(java.
-                                               beans.PropertyChangeEvent e) {
-                if ("\u0062or\u0064er".equals(e.getPropertyName())) throw new RuntimeException();
-            }
-        });
+        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.
+        EmptyBorder(0,0,0,0), "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e",javax.swing.border.TitledBorder.CENTER,javax.swing
+        .border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069al\u006fg",java.awt.Font.BOLD,12),
+        java.awt.Color.red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener()
+        {@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062or\u0064er".equals(e.getPropertyName()))
+        throw new RuntimeException();}});
 
         //---- adminRadioBtn ----
         adminRadioBtn.setText("Admin");
@@ -90,10 +85,10 @@ public class LoginView extends JPanel {
         usernameField.setToolTipText("Password LMAO");
 
         //---- usernameLabel ----
-        usernameLabel.setText("ID/Username - 6 digits");
+        usernameLabel.setText("ID/Username/MedID");
 
         //---- passwordLabel ----
-        passwordLabel.setText("Passcode/Password - 6 digits");
+        passwordLabel.setText("Passcode/Password - 8 digits");
 
         //---- loginBtn ----
         loginBtn.setText("LOG IN");
@@ -102,52 +97,52 @@ public class LoginView extends JPanel {
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup()
-                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(69, Short.MAX_VALUE)
-                                .addComponent(doctorRadioBtn)
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                        .addComponent(loginLabel, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(patientRadioBtn))
-                                .addGap(18, 18, 18)
-                                .addComponent(adminRadioBtn)
-                                .addGap(99, 99, 99))
+            layout.createParallelGroup()
+                .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(69, Short.MAX_VALUE)
+                    .addComponent(doctorRadioBtn)
+                    .addGap(28, 28, 28)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                        .addComponent(loginLabel, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(patientRadioBtn))
+                    .addGap(18, 18, 18)
+                    .addComponent(adminRadioBtn)
+                    .addGap(99, 99, 99))
+                .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup()
                         .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup()
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(100, 100, 100)
-                                                .addGroup(layout.createParallelGroup()
-                                                        .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(usernameField, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(usernameLabel, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(passwordLabel, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(149, 149, 149)
-                                                .addComponent(loginBtn)))
-                                .addContainerGap(118, Short.MAX_VALUE))
+                            .addGap(100, 100, 100)
+                            .addGroup(layout.createParallelGroup()
+                                .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(usernameField, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(usernameLabel, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(passwordLabel, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(149, 149, 149)
+                            .addComponent(loginBtn)))
+                    .addContainerGap(118, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup()
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(53, 53, 53)
-                                .addComponent(loginLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(adminRadioBtn)
-                                        .addComponent(patientRadioBtn)
-                                        .addComponent(doctorRadioBtn))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(usernameLabel)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(usernameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(passwordLabel)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(loginBtn)
-                                .addContainerGap(29, Short.MAX_VALUE))
+            layout.createParallelGroup()
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(53, 53, 53)
+                    .addComponent(loginLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(adminRadioBtn)
+                        .addComponent(patientRadioBtn)
+                        .addComponent(doctorRadioBtn))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(usernameLabel)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(usernameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(passwordLabel)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(loginBtn)
+                    .addContainerGap(29, Short.MAX_VALUE))
         );
 
         //---- radioBtnGroup ----
@@ -159,7 +154,7 @@ public class LoginView extends JPanel {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - unknown
+    // Generated using JFormDesigner Evaluation license - Patrick Andersson
     private JRadioButton adminRadioBtn;
     private JRadioButton patientRadioBtn;
     private JRadioButton doctorRadioBtn;

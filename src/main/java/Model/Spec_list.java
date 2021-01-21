@@ -2,7 +2,7 @@ package Model;
 
 public class Spec_list {
     private String specialisation;
-    private int doctorId;
+    private Integer doctorId;
     private int specPrice;
 
     public String getSpecialisation() {
@@ -29,8 +29,9 @@ public class Spec_list {
         this.specPrice = specPrice;
     }
 
-    public Spec_list(String specialisation, int specPrice) {
+    public Spec_list(String specialisation, Integer doctorId, int specPrice) {
         this.specialisation = specialisation;
+        this.doctorId = doctorId;
         this.specPrice = specPrice;
     }
 }

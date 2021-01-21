@@ -40,7 +40,7 @@ public class MedicalRecordView extends JPanel {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - unknown
+        // Generated using JFormDesigner Evaluation license - Patrick Andersson
         scrollPane1 = new JScrollPane();
         diagField = new JTextPane();
         diagLabel = new JLabel();
@@ -55,18 +55,13 @@ public class MedicalRecordView extends JPanel {
         saveRecordBtn = new JButton();
 
         //======== this ========
-        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
-                border.EmptyBorder(0, 0, 0, 0), "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax.swing.border.TitledBorder.CENTER
-                , javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("D\u0069al\u006fg", java.awt.Font
-                .BOLD, 12), java.awt.Color.red), getBorder()));
-        addPropertyChangeListener(
-                new java.beans.PropertyChangeListener() {
-                    @Override
-                    public void propertyChange(java.beans.PropertyChangeEvent e) {
-                        if ("\u0062or\u0064er"
-                                .equals(e.getPropertyName())) throw new RuntimeException();
-                    }
-                });
+        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+        javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax
+        . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+        .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ), java. awt
+        . Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans.
+        PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .
+        equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
         //======== scrollPane1 ========
         {
@@ -105,60 +100,60 @@ public class MedicalRecordView extends JPanel {
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup()
+            layout.createParallelGroup()
+                .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup()
                         .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup()
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(49, 49, 49)
-                                                .addGroup(layout.createParallelGroup()
-                                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                                                .addComponent(scrollPane1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                                                                .addComponent(descLabel, GroupLayout.Alignment.LEADING)
-                                                                .addComponent(scrollPane2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
-                                                        .addComponent(diagLabel))
-                                                .addGap(57, 57, 57)
-                                                .addGroup(layout.createParallelGroup()
-                                                        .addComponent(drugLabel)
-                                                        .addComponent(scrollPane3, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(saveRecordBtn)))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(107, 107, 107)
-                                                .addComponent(patNameLabel)
-                                                .addGap(43, 43, 43)
-                                                .addComponent(dateLabel)))
-                                .addContainerGap(78, Short.MAX_VALUE))
+                            .addGap(49, 49, 49)
+                            .addGroup(layout.createParallelGroup()
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(scrollPane1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                                    .addComponent(descLabel, GroupLayout.Alignment.LEADING)
+                                    .addComponent(scrollPane2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
+                                .addComponent(diagLabel))
+                            .addGap(57, 57, 57)
+                            .addGroup(layout.createParallelGroup()
+                                .addComponent(drugLabel)
+                                .addComponent(scrollPane3, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(saveRecordBtn)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(107, 107, 107)
+                            .addComponent(patNameLabel)
+                            .addGap(43, 43, 43)
+                            .addComponent(dateLabel)))
+                    .addContainerGap(78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup()
+            layout.createParallelGroup()
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(dateLabel)
+                        .addComponent(patNameLabel))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(descLabel)
+                        .addComponent(drugLabel))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup()
+                        .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(scrollPane3, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup()
                         .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(dateLabel)
-                                        .addComponent(patNameLabel))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(descLabel)
-                                        .addComponent(drugLabel))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup()
-                                        .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(scrollPane3, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup()
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(diagLabel)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(37, 37, 37)
-                                                .addComponent(saveRecordBtn)))
-                                .addGap(37, 37, 37))
+                            .addComponent(diagLabel)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(37, 37, 37)
+                            .addComponent(saveRecordBtn)))
+                    .addGap(37, 37, 37))
         );
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - unknown
+    // Generated using JFormDesigner Evaluation license - Patrick Andersson
     private JScrollPane scrollPane1;
     private JTextPane diagField;
     private JLabel diagLabel;
