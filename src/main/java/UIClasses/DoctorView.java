@@ -34,7 +34,7 @@ public class DoctorView extends JPanel {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - unknown
+        // Generated using JFormDesigner Evaluation license - Patrick Andersson
         weekdayBox = new JComboBox();
         timeBox = new JComboBox();
         unavailableBtn = new JButton();
