@@ -17,11 +17,13 @@ public class AdminView extends JPanel {
     private Controller controller;
     private AdminTable admin;
     private ArrayList<Spec_list> specList;
+    private ArrayList<Doctor> docList;
 
-    public AdminView(Controller controller, AdminTable admin, ArrayList<Spec_list> specList) {
+    public AdminView(Controller controller, AdminTable admin, ArrayList<Spec_list> specList, ArrayList<Doctor> docList) {
         this.controller = controller;
         this.admin = admin;
         this.specList = specList;
+        this.docList = docList;
         initComponents();
     }
 
@@ -43,7 +45,9 @@ public class AdminView extends JPanel {
         addDoctorField.setText("");
 
         String spec = chooseSpecBox.getSelectedItem().toString();
-
+        if (spec == null) {
+            JOptionPane.showMessageDialog(null, spec + "YOU FUCKED UP");
+        }
         String firstName = firstnameField.getText();
         firstnameField.setText("");
 
@@ -55,14 +59,16 @@ public class AdminView extends JPanel {
 
         Doctor doctor = new Doctor(employeeNumber, firstName, lastName, spec, password);
 
-        //DatabaseConnection.addDoctor(doctor);
+        controller.addDoctor(doctor);
+
+        doctorListBox.addItem(doctor);
     }
 
     private void deleteDoctor(ActionEvent e) {
         Doctor doctor = (Doctor) doctorListBox.getSelectedItem();
+        doctorListBox.removeItem(doctor);
 
-        // if (doctor != null)
-        // DatabaseConnection.deleteDoctor(doctor.getId());
+        controller.deleteDoctor(doctor);
     }
 
     private void seeAppList(ActionEvent e) {
@@ -80,20 +86,24 @@ public class AdminView extends JPanel {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - Patrick Andersson
+        // Generated using JFormDesigner Evaluation license - Antoine Rebelo>
         addCostField = new JTextField();
         addSpecField = new JTextField();
         addDoctorField = new JTextField();
-        DefaultComboBoxModel dml = new DefaultComboBoxModel();
+        DefaultComboBoxModel dmlSpec = new DefaultComboBoxModel();
         for (Spec_list spec_list : specList) {
-            dml.addElement(spec_list.getSpecialisation());
+            dmlSpec.addElement(spec_list.getSpecialisation());
         }
         chooseSpecBox = new JComboBox<String>();
-        chooseSpecBox.setModel(dml);
+        chooseSpecBox.setModel(dmlSpec);
         firstnameField = new JTextField();
         surnameField = new JTextField();
         doctorPasswordField = new JTextField();
-        doctorListBox = new JComboBox();
+        DefaultComboBoxModel dmlDoc = new DefaultComboBoxModel();
+        for (Doctor doctor : docList) {
+            dmlDoc.addElement(doctor);
+        }
+        doctorListBox = new JComboBox(dmlDoc);
         deleteDoctorBtn = new JButton();
         addSpecBtn = new JButton();
         addDoctorBtn = new JButton();

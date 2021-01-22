@@ -47,6 +47,11 @@ public class Doctor {
         this.pw = pw;
     }
 
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
+
     public Doctor(int id, String firstName, String lastName, String specialisation, String pw) {
         this.id = id;
         this.firstName = firstName;

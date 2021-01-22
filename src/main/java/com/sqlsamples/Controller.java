@@ -5,6 +5,7 @@ import Model.Doctor;
 import Model.Patient;
 import Model.Spec_list;
 import UIClasses.*;
+import UIClasses.LoginView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 public class Controller {
     private Doctor doctor;
     private ArrayList<Spec_list> specList;
+    private ArrayList<Doctor> docList;
     JFrame frame;
     LoginView loginView;
     AdminView adminView;
@@ -63,7 +65,8 @@ public class Controller {
                 break;
             case "admin":
                 specList = DatabaseConnection.getSpecialisations();
-                adminView = new AdminView(this, (AdminTable) user, specList);
+                docList = DatabaseConnection.getDoctors();
+                adminView = new AdminView(this, (AdminTable) user, specList, docList);
                 frame.setSize(600, 400);
                 frame.add(adminView, BorderLayout.CENTER);
                 break;
@@ -84,4 +87,14 @@ public class Controller {
     public void addSpec(Spec_list spec) {
         DatabaseConnection.addSpecialisation(spec);
     }
+
+    public void addDoctor(Doctor doctor) {
+        DatabaseConnection.addDoctor(doctor);
+    }
+
+    public void deleteDoctor(Doctor doctor) {
+        DatabaseConnection.deleteDoctor(doctor);
+    }
+
+
 }

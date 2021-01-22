@@ -225,4 +225,66 @@ public class DatabaseConnection {
 
         return speclist;
     }
+
+    public static ArrayList<Doctor> getDoctors() {
+        String query = "SELECT * FROM doctor;";
+        ArrayList<Doctor> docList = new ArrayList<Doctor>();
+        Doctor doc = null;
+
+        try {
+            PreparedStatement ps = conn.prepareCall(query);
+            ResultSet results = ps.executeQuery();
+            while (results.next()) {
+
+                int docId = results.getInt(1);
+                String firstName = results.getString(2);
+                String lastName = results.getString(3);
+                String spec = results.getString(4);
+                String password = results.getString(5);
+
+                doc = new Doctor(docId, firstName, lastName, spec, password);
+                docList.add(doc);
+            }
+            results.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return docList;
+    }
+
+    public static void addDoctor(Doctor doctor) {
+        String query = "INSERT INTO doctor VALUES (?,?,?,?,?)";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setInt(1, doctor.getId());
+            ps.setString(2, doctor.getFirstName());
+            ps.setString(3, doctor.getLastName());
+            ps.setString(4, doctor.getSpecialisation());
+            ps.setString(5, doctor.getPw());
+
+            ps.execute();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteDoctor(Doctor doctor) {
+        String query = "DELETE FROM doctor WHERE d_id=?;";
+        int doctorID = doctor.getId();
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, doctorID);
+
+            ps.execute();
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "DON'T TELL ME WHAT TO DO");
+        }
+    }
 }
