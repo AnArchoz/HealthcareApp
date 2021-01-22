@@ -1,0 +1,115 @@
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :41:41:p, par l {seq {par l {seq {par l {seq l {comp addSpecField:::p:83:p, space :::p, comp addCostField:::p:91:p}, comp addSpecLabel::l:p:186:p}, space :p:79:p, par l {seq {comp patientIdField:::p:79:p, space s:::p, comp medRecBtn:::p::p}, comp idLabel:::p::p}}, seq l {par l {seq {space :p:129:p, par l {comp chooseSpecBox:::p:136:p, comp lastnameLabel:::p::p, comp surnameField:::p:93:p}}, seq {comp doctorPasswordField:::p:108:p, space s:::p, comp addDoctorBtn:::p::p}, comp removeDoctorLabel:::p::p, seq l {comp doctorListBox:::p:117:p, space :::p, comp deleteDoctorBtn:::p:120:p}, seq l {par l {par l:::p {comp addDoctorField::l::102:x, comp employeeLabel::l::102:x}, comp firstnameLabel:::p::p, comp firstnameField:::p:102:p, comp passwordLabel:::p::p}, space :p:27:p, comp specLabel:::p::p}}, par l {seq {space :::p, comp appListBtn:::p::p, space u:::p, comp patientListBtn:::p::p}, seq l {space :p:17:p, comp scrollPane1:::p:225:p}}}}, space :p:37:p}, seq {comp addSpecBtn:::p::p, space :::x, comp listLabel:::p::p, space :::p}}}}"
+			"$verticalGroup": "par l {seq l {par l {seq l {space :p:20:p, comp addSpecLabel:::p::p, par b {comp addSpecField::b:p::p, comp addCostField::b:p::p}, space :::p, comp addSpecBtn:::p::p, space :::x, par b {comp employeeLabel::b:p::p, comp specLabel::b:p::p}, par b {comp addDoctorField::b:p::p, comp chooseSpecBox::b:p::p}, space u:::p}, seq l {space :::x, comp idLabel:::p:16:p, space :::p, par b {comp medRecBtn::b:p::p, comp patientIdField::b:p::p}, space :p:23:p, comp listLabel:::p::p, space u:::p, par b {comp appListBtn::b:p::p, comp patientListBtn::b:p::p}, space :::x}}, par l {seq {par b {comp firstnameLabel::b:p::p, comp lastnameLabel::b:p::p}, space :::p, par b {comp firstnameField::b:p::p, comp surnameField::b:p::p}, space s:::p, comp passwordLabel:::p::p, space :p:3:p, par b {comp doctorPasswordField::b:p::p, comp addDoctorBtn::b:p::p}, space s:::p, comp removeDoctorLabel:::p::p, space :::p, par b {comp doctorListBox::b:p::p, comp deleteDoctorBtn::b:p::p}}, comp scrollPane1:::p:189:p}, space :p:97:p}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "addCostField"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "addSpecField"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "addDoctorField"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "chooseSpecBox"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "firstnameField"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "surnameField"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "doctorPasswordField"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "doctorListBox"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "deleteDoctorBtn"
+				"text": "Remove Doctor"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "deleteDoctor", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "addSpecBtn"
+				"text": "Add Specialisation"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addSpecialisation", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "addDoctorBtn"
+				"text": "Add Doctor"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addDoctor", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "addSpecLabel"
+				"text": "Add specialisation / add visit Price"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "employeeLabel"
+				"text": "Employee number"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "specLabel"
+				"text": "Specialisation"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "firstnameLabel"
+				"text": "First name"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "lastnameLabel"
+				"text": "Last name"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "removeDoctorLabel"
+				"text": "Remove existing doctor"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "passwordLabel"
+				"text": "Password - 6 digits"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "patientListBtn"
+				"text": "Patient list"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "seePatientList", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "appListBtn"
+				"text": "Appointment list"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "seeAppList", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "patientIdField"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "medRecBtn"
+				"text": "See Medical Record"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "seeMedicalRecord", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "idLabel"
+				"text": "Patient ID"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "listLabel"
+				"text": "List and information of all patients and appointments"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JList" ) {
+					name: "appPatientList"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 5, 5 )
+			"size": new java.awt.Dimension( 585, 360 )
+		} )
+	}
+}

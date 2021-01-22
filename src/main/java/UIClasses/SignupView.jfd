@@ -1,0 +1,41 @@
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq l {space :p:160:p, comp signupBTN:::p::p}, seq l {space :p:127:p, par l:::p {comp label1:::::x, comp usernameField:::::x, comp passwordField1:::::x, comp passwordLabel::l:::x, comp usernameLabel::l:::x}}}, space ::126:x}}"
+			"$verticalGroup": "par l {seq l {space :p:30:p, comp label1:::p:73:p, space :::p, comp usernameLabel:::p::p, space :p:2:p, comp usernameField:::p::p, space :p:16:p, comp passwordLabel:::p::p, space :::p, comp passwordField1:::p::p, space s:::p, comp signupBTN:::p::p, space ::27:x}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "USER SIGNUP"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 2, 25, true )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "usernameField"
+				"toolTipText": "Medical Number"
+			} )
+			add( new FormComponent( "javax.swing.JPasswordField" ) {
+				name: "passwordField1"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "usernameLabel"
+				"text": "Medical number - 9 digits"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "passwordLabel"
+				"text": "Passcode - 8 digits"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "signupBTN"
+				"text": "SIGN UP"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "signup", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}
