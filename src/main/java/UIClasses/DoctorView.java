@@ -169,7 +169,7 @@ public class DoctorView extends JPanel {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - unknown
+    // Generated using JFormDesigner Evaluation license - Patrick Andersson
     private JComboBox weekdayBox;
     private JComboBox timeBox;
     private JButton unavailableBtn;
