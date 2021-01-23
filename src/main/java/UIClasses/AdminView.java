@@ -72,15 +72,37 @@ public class AdminView extends JPanel {
     }
 
     private void seeAppList(ActionEvent e) {
-        //TODO: add list function
+        if (appPatientList.getModel().getSize() != 0)
+            appPatientList.removeAll();
+
+        ArrayList<String> appList = controller.getAllAppointments();
+        DefaultListModel<String> model = new DefaultListModel<>();
+
+        for (String app : appList) {
+            model.addElement(app);
+        }
+        appPatientList.setModel(model);
     }
 
+
     private void seePatientList(ActionEvent e) {
-        //TODO: add list function
+        if (appPatientList.getModel().getSize() != 0)
+            appPatientList.removeAll();
+
+        ArrayList<String> patList = controller.getAllPatients(false);
+        DefaultListModel<String> model = new DefaultListModel<>();
+
+        for (String pat : patList) {
+            model.addElement(pat);
+        }
+
+        appPatientList.setModel(model);
+
     }
 
     private void seeMedicalRecord(ActionEvent e) {
-        //TODO: add popup
+        int patientID = Integer.parseInt(patientIdField.getText());
+        controller.openView("medical record", null, patientID);
     }
 
 
@@ -121,7 +143,7 @@ public class AdminView extends JPanel {
         idLabel = new JLabel();
         listLabel = new JLabel();
         scrollPane1 = new JScrollPane();
-        appPatientList = new JList();
+        appPatientList = new JList<String>();
 
         //======== this ========
         setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new

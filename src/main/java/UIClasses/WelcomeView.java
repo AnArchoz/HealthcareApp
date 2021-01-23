@@ -9,9 +9,7 @@ import com.sqlsamples.Controller;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-/**
- * @author unknown
- */
+
 public class WelcomeView extends JPanel {
     private Controller controller;
 
@@ -21,11 +19,11 @@ public class WelcomeView extends JPanel {
     }
 
     private void login(ActionEvent e) {
-        controller.openView("login", null);
+        controller.openView("login", null, -1);
     }
 
     private void signup(ActionEvent e) {
-        controller.openView("signup", null);
+        controller.openView("signup", null, -1);
     }
 
     private void signupBTNActionPerformed(ActionEvent e) {
@@ -34,17 +32,23 @@ public class WelcomeView extends JPanel {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - unknown
+        // Generated using JFormDesigner Evaluation license - Antoine Rebelo
         loginBTN = new JButton();
         signupBTN = new JButton();
 
         //======== this ========
-        setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
-        border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER
-        , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font
-        .BOLD ,12 ), java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (
-        new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r"
-        .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+        setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
+                border.EmptyBorder(0, 0, 0, 0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax.swing.border.TitledBorder.CENTER
+                , javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dia\u006cog", java.awt.Font
+                .BOLD, 12), java.awt.Color.red), getBorder()));
+        addPropertyChangeListener(
+                new java.beans.PropertyChangeListener() {
+                    @Override
+                    public void propertyChange(java.beans.PropertyChangeEvent e) {
+                        if ("bord\u0065r"
+                                .equals(e.getPropertyName())) throw new RuntimeException();
+                    }
+                });
 
         //---- loginBTN ----
         loginBTN.setText("LOGIN");
@@ -53,29 +57,29 @@ public class WelcomeView extends JPanel {
         //---- signupBTN ----
         signupBTN.setText("SIGN UP");
         signupBTN.addActionListener(e -> {
-			signupBTNActionPerformed(e);
-			signup(e);
-		});
+            signupBTNActionPerformed(e);
+            signup(e);
+        });
 
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup()
-                .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(94, 94, 94)
-                    .addComponent(signupBTN)
-                    .addGap(57, 57, 57)
-                    .addComponent(loginBTN)
-                    .addContainerGap(93, Short.MAX_VALUE))
+                layout.createParallelGroup()
+                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(94, 94, 94)
+                                .addComponent(signupBTN)
+                                .addGap(57, 57, 57)
+                                .addComponent(loginBTN)
+                                .addContainerGap(93, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup()
-                .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(197, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(signupBTN)
-                        .addComponent(loginBTN))
-                    .addGap(73, 73, 73))
+                layout.createParallelGroup()
+                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(197, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(signupBTN)
+                                        .addComponent(loginBTN))
+                                .addGap(73, 73, 73))
         );
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }

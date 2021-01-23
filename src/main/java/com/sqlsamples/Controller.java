@@ -1,20 +1,16 @@
 package com.sqlsamples;
 
-import Model.AdminTable;
-import Model.Doctor;
-import Model.Patient;
-import Model.Spec_list;
+import Model.*;
 import UIClasses.*;
-import UIClasses.LoginView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Controller {
-    private Doctor doctor;
     private ArrayList<Spec_list> specList;
     private ArrayList<Doctor> docList;
+    private Doctor doctor;
     JFrame frame;
     LoginView loginView;
     AdminView adminView;
@@ -39,7 +35,7 @@ public class Controller {
 
     }
 
-    public void openView(String view, Object user) {
+    public void openView(String view, Object user, int patientId) {
         frame.getContentPane().removeAll();
         switch (view) {
             case "login":
@@ -59,7 +55,7 @@ public class Controller {
                 frame.add(patientView, BorderLayout.CENTER);
                 break;
             case "doctor":
-                doctorView = new DoctorView(this, (Doctor) user);
+                doctorView = new DoctorView(this, (Doctor) user, DatabaseConnection.getAllPatients(true));
                 frame.setSize(400, 300);
                 frame.add(doctorView, BorderLayout.CENTER);
                 break;
@@ -71,7 +67,13 @@ public class Controller {
                 frame.add(adminView, BorderLayout.CENTER);
                 break;
             case "medical record":
-                medicalRecordView = new MedicalRecordView(this);
+                MedicalRecord medRecord = DatabaseConnection.getMedRecord(patientId);
+                if (medRecord == null) {
+                    medRecord = new MedicalRecord(patientId, 0, 0, "null for now",
+                            "", "", "");
+                }
+                medicalRecordView = new MedicalRecordView(this, medRecord, (Doctor) user);
+
                 frame.setSize(400, 300);
                 frame.add(medicalRecordView, BorderLayout.CENTER);
                 break;
@@ -96,5 +98,20 @@ public class Controller {
         DatabaseConnection.deleteDoctor(doctor);
     }
 
+    public ArrayList<String> getAllAppointments() {
+        return DatabaseConnection.getAllAppointments();
+    }
 
+    public ArrayList<String> getAllPatients(boolean patID) {
+        return DatabaseConnection.getAllPatients(patID);
+    }
+
+    public MedicalRecord getMedicalRecord(int patientID) {
+        return DatabaseConnection.getMedRecord(patientID);
+    }
+
+    public void addMedicalRecord(MedicalRecord medicalRecord) {
+        DatabaseConnection.addMedicalRecord(medicalRecord);
+    }
 }
+
