@@ -32,7 +32,7 @@ public class LoginView extends JPanel {
         if (patientRadioBtn.isSelected()) {
             Patient patient = DatabaseConnection.checkPatientLogin(username, password);
             if (patient != null) {
-                controller.openView("patient", patient, -1);
+                controller.openView("patient", patient, patient.getPatientId());
             }
         } else if (doctorRadioBtn.isSelected()) {
             Doctor doctor = DatabaseConnection.checkDoctorLogin(username, password);

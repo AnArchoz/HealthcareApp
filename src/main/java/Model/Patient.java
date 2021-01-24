@@ -11,12 +11,12 @@ public class Patient {
     private String address;
     private int phone;
     private Date birthDate;
-    private String regDay;
+    private Timestamp regDay;
     private String password;
     private int totalCost;
 
     public Patient(int patientId, String firstname, String lastname, String gender, String address, int phone,
-                   Date birthDate, String regDay, String password, int totalCost) {
+                   Date birthDate, Timestamp regDay, String password, int totalCost) {
         this.patientId = patientId;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -101,11 +101,11 @@ public class Patient {
         this.birthDate = birthDate;
     }
 
-    public String getRegDay() {
+    public Timestamp getRegDay() {
         return regDay;
     }
 
-    public void setRegDay(String regDay) {
+    public void setRegDay(Timestamp regDay) {
         this.regDay = regDay;
     }
 

@@ -1,6 +1,9 @@
 package com.sqlsamples;
 
-import Model.*;
+import Model.AdminTable;
+import Model.Doctor;
+import Model.MedicalRecord;
+import Model.Patient;
 import UIClasses.*;
 
 import javax.swing.*;
@@ -8,7 +11,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Controller {
-    private ArrayList<Spec_list> specList;
     private ArrayList<Doctor> docList;
     private Doctor doctor;
     JFrame frame;
@@ -60,9 +62,8 @@ public class Controller {
                 frame.add(doctorView, BorderLayout.CENTER);
                 break;
             case "admin":
-                specList = DatabaseConnection.getSpecialisations();
                 docList = DatabaseConnection.getDoctors();
-                adminView = new AdminView(this, (AdminTable) user, specList, docList);
+                adminView = new AdminView(this, (AdminTable) user, docList);
                 frame.setSize(600, 400);
                 frame.add(adminView, BorderLayout.CENTER);
                 break;
@@ -82,13 +83,6 @@ public class Controller {
         frame.repaint();
     }
 
-    public void testProcedure() {
-        System.out.println(DatabaseConnection.getAppointment(1).toString());
-    }
-
-    public void addSpec(Spec_list spec) {
-        DatabaseConnection.addSpecialisation(spec);
-    }
 
     public void addDoctor(Doctor doctor) {
         DatabaseConnection.addDoctor(doctor);
@@ -112,6 +106,18 @@ public class Controller {
 
     public void addMedicalRecord(MedicalRecord medicalRecord) {
         DatabaseConnection.addMedicalRecord(medicalRecord);
+    }
+
+    public void addPatient(Patient patient) {
+        DatabaseConnection.addPatient(patient);
+    }
+
+    public ArrayList<Doctor> getDoctorInfo() {
+        return DatabaseConnection.getDoctors();
+    }
+
+    public void updatePatient(Patient patient) {
+        DatabaseConnection.updatePatient(patient);
     }
 }
 

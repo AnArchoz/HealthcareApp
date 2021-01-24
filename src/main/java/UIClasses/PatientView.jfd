@@ -1,11 +1,11 @@
-JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9.1" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq t {par t {seq l {space :p:42:p, par t {comp doctorListLbl::l:p::p, comp doctorListBox::l:p:136:p, seq l {par l {comp selectedDoctorLbl::l:p::p, comp specSearchLbl::l:p::p, comp specSearchField::l:p:110:p, comp timesBtn:::p::p, comp phoneField::l:p:85:p}, space :::p, par l {seq {comp scrollPane1:::p:161:p, space :::p, comp saveInfoBtn:::p::p}, seq {comp scrollPane2:::p:99:p, space :::p, par l {comp availableTimeBox:::p::p, comp availableTimeLbl:::p::p, comp makeAppBtn:::p::p}}}}, seq l {comp phoneLbl:::p::p, space :p:111:p, comp addressLbl:::p::p}, comp genderField::l:p::p, seq l {par l {comp firstNameField:::p:83:p, seq l {space :p:10:p, comp firstnameLbl:::p::p}}, par l:::p {seq {space u:::p, comp lastNameField:::p:83:p}, seq t {space :::x, comp lastnameLbl:::p::p, space :p:15:p}}}, comp genderLbl::l:p::p}, space :0:0:x}, seq {space :::x, par t {seq t {comp regDateLbl:::p::p, space :p:87:p, par l {comp patientNameLbl:::p:142:p, par t:l::p {comp birthdayField::l:::x, seq {space :6:6:p, comp dateLbl:::p::p}}}}, seq t {par t {comp passwordLbl:::p::p, comp passwordField1:::p:100:p}, space :p:71:p}}}}, space :p:60:p}}"
-			"$verticalGroup": "par l {seq l {space s:::p, par b {comp regDateLbl::b:p::p, comp patientNameLbl::b:p::p}, space :::p, par l {comp dateLbl::t:p::p, comp lastnameLbl::l:p::p, comp firstnameLbl::l:p::p}, par l {seq {par b {comp firstNameField::b:p::p, comp lastNameField::b:p::p}, space u:::p, par l {seq {comp genderLbl:::p::p, space :::p, comp genderField:::p::p}, seq t {space :p:8:p, comp passwordLbl:::p::p, space ::9:x, comp passwordField1:::p::p}}}, seq {space :p:4:p, comp birthdayField:::p::p, space :p:64:p}}, space :::p, par b {comp phoneLbl::b:p::p, comp addressLbl::b:p::p}, par l {seq {space :::p, par l {comp scrollPane1:::p:45:p, comp phoneField:::p::p}}, seq l {space :p:16:p, comp saveInfoBtn:::p::p}}, space :p:18:p, comp doctorListLbl:::p::p, space :::p, comp doctorListBox:::p:47:p, space s:::p, par l {comp scrollPane2::l::158:x, seq {par l {seq {comp specSearchLbl:::p::p, space :::p, comp specSearchField:::p::p, space s:::p, comp selectedDoctorLbl:::p::p, space :::p, comp timesBtn:::p::p}, seq l {comp availableTimeLbl:::p::p, space :::p, comp availableTimeBox:::p::p, space :p:37:p, comp makeAppBtn:::p::p}}, space ::36:x}}}}"
+			"$horizontalGroup": "par l {seq t {space :p:86:p, comp regDateLbl:::p::p, space :p:65:p, par l {comp dateLbl:::p::p, comp patientNameLbl:::p:142:p, comp birthdayField::l:p:73:p}, space :::x}, seq l {space :p:26:p, par l {seq {par l {seq {space :p:16:p, par l {seq {par l {comp genderField:::p:77:p, comp phoneLbl:::::x}, space :::x}, seq {par l {comp genderLbl::l:p::p, comp phoneField:::p:85:p, comp doctorListLbl::l:p::p, seq l {space :p:1:p, comp selectedDoctorLbl:::p::p}}, space :24::x}}, par l {comp passwordLbl::l:p::p, seq l {par t {comp passwordField1:::p:100:p, comp addressLbl:::p::p}, space :::p, comp saveInfoBtn:::p::p}, seq l {space :p:13:p, comp scrollPane1:::p:153:p}}}, seq l {comp timesBtn:::p::p, par l {seq {space :p:47:p, comp scrollPane2:::p:129:p, space :6:7:x}, seq {space :p:41:p, comp makeAppBtn::::142:x}}}, seq {par l {comp firstNameField:::p:83:p, seq l {space :p:10:p, comp firstnameLbl:::p::p}}, par l:::p {seq {space u:::p, comp lastNameField:::p:83:p}, seq t {space :::x, comp lastnameLbl:::p::p, space :p:15:p}}, space :0:141:x}}, space :p:143:p}, seq {comp doctorListBox:::p:136:p, space :0:0:x}, seq l {space :p:187:p, comp availableTimeLbl:::p::p, space :::x}}}}"
+			"$verticalGroup": "par l {seq l {par b {comp regDateLbl::b:p:22:p, comp patientNameLbl::b:p::p}, space s:::p, par l {comp lastnameLbl::l:p::p, comp firstnameLbl::l:p::p, comp dateLbl::l:p::p}, par l {seq {par b {comp firstNameField::b:p::p, comp lastNameField::b:p::p}, space :p:16:p}, seq t {space :::p, comp birthdayField:::p::p, space u:::p}}, par l {comp genderLbl:::p::p, comp passwordLbl::t:p::p}, space :::p, par l {seq {comp genderField:::p::p, space s:::p, comp phoneLbl:::p::p, space :::p, comp phoneField:::p::p}, seq l {par b {comp passwordField1::b:p::p, comp saveInfoBtn::b:p::p}, space :::p, comp addressLbl:::p::p, space :::p, comp scrollPane1:::p:30:p}}, space :p:7:p, par l {seq l {comp availableTimeLbl:::p::p, space :::p, comp scrollPane2:::p:71:p}, seq l {comp doctorListLbl:::p::p, space :::p, comp doctorListBox:::p:47:p, space :::p, comp selectedDoctorLbl:::p::p, space :::p, par b {comp timesBtn::b:p::p, comp makeAppBtn::b:p::p}}}, space ::2:x}}"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
@@ -50,7 +50,7 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "passwordLbl"
-				"text": "Password - 6 digits"
+				"text": "Password - 8 digits"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "firstnameLbl"
@@ -75,29 +75,20 @@ new FormModel {
 				name: "doctorListLbl"
 				"text": "List of doctors"
 			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "specSearchLbl"
-				"text": "Search specialisation"
-			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane2"
 				add( new FormComponent( "javax.swing.JList" ) {
-					name: "list1"
+					name: "doctorTimeList"
 				} )
-			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "specSearchField"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "timesBtn"
 				"text": "See available times"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "seeTimes", true ) )
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "selectedDoctorLbl"
 				"text": "Selected doctor"
-			} )
-			add( new FormComponent( "javax.swing.JComboBox" ) {
-				name: "availableTimeBox"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "availableTimeLbl"
@@ -114,7 +105,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 450, 485 )
+			"size": new java.awt.Dimension( 360, 360 )
 		} )
 	}
 }

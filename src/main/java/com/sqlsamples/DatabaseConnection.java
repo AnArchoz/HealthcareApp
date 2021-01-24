@@ -45,7 +45,8 @@ public class DatabaseConnection {
                 String firstname = results.getString(2);
                 String lastname = results.getString(3);
                 String spec = results.getString(4);
-                doctor = new Doctor(id, firstname, lastname, spec, password);
+                int visitCost = results.getInt(5);
+                doctor = new Doctor(id, firstname, lastname, spec, visitCost, password);
             }
             results.close();
             ps.close();
@@ -76,7 +77,8 @@ public class DatabaseConnection {
                 String address = results.getString(5);
                 int phone = results.getInt(6);
                 Date birthDate = results.getDate(7);
-                String regDay = results.getString(8);
+                Timestamp regDay = results.getTimestamp(8);
+                int totalCost = results.getInt(10);
 
                 patient = new Patient(id, firstname, lastname, gender, address,
                         phone, birthDate, regDay, password, 0);
@@ -117,69 +119,37 @@ public class DatabaseConnection {
         return admin;
     }
 
-    public static Patient getPatientInfo(int id) {
-        String query = "EXECUTE getPatient @pat_id =? ";
-        Patient patient = null;
-
-        try {
-            CallableStatement cs = conn.prepareCall(query);
-            cs.setInt(1, id);
-
-            ResultSet results = cs.executeQuery();
-
-            if (!results.next()) {
-                JOptionPane.showMessageDialog(null, "Wrong username and/or password!");
-                return null;
-            } else {
-                String firstname = results.getString(1);
-                String lastname = results.getString(2);
-                Date birthDate = results.getDate(3);
-
-
-                patient = new Patient(id, firstname, lastname, null, null,
-                        1231293, birthDate, null, null, 0);
-            }
-
-            results.close();
-            cs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return patient;
-    }
-
-    public static Appointment getAppointment(int id) {
-        String query = "EXECUTE getAppointment @app_id =? ";
-        Appointment app = null;
-
-        try {
-            CallableStatement cs = conn.prepareCall(query);
-            cs.setInt(1, id);
-
-            ResultSet results = cs.executeQuery();
-
-            if (!results.next()) {
-                JOptionPane.showMessageDialog(null, "Wrong username and/or password!");
-                return null;
-            } else {
-                int pat_id = results.getInt(1);
-                int dr_id = results.getInt(2);
-                String app_date = results.getString(3);
-                Timestamp bookTime = results.getTimestamp(4);
-                Date date = new Date(bookTime.getTime());
-
-                app = new Appointment(id, pat_id, dr_id, app_date, date);
-            }
-
-            results.close();
-            cs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return app;
-    }
+//    public static Appointment getFreeAppointments(int docid) {
+//        String query = "EXECUTE getAppointment @app_id =? ";
+//        Appointment app = null;
+//
+//        try {
+//            CallableStatement cs = conn.prepareCall(query);
+//            cs.setInt(1, id);
+//
+//            ResultSet results = cs.executeQuery();
+//
+//            if (!results.next()) {
+//                JOptionPane.showMessageDialog(null, "Wrong username and/or password!");
+//                return null;
+//            } else {
+//                int pat_id = results.getInt(1);
+//                int dr_id = results.getInt(2);
+//                String app_date = results.getString(3);
+//                Timestamp bookTime = results.getTimestamp(4);
+//                Date date = new Date(bookTime.getTime());
+//
+//                app = new Appointment(id, pat_id, dr_id, app_date, date);
+//            }
+//
+//            results.close();
+//            cs.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return app;
+//    }
 
     public static MedicalRecord getMedRecord(int patientId) {
         String query = "EXECUTE getMedicalRecord @mc_pat_id=?";
@@ -279,56 +249,10 @@ public class DatabaseConnection {
         return patientList;
     }
 
-    public static void addSpecialisation(Spec_list specialisation) {
-        String query = "INSERT INTO spec_list VALUES (?,?,?)";
-        try {
-            PreparedStatement ps = conn.prepareStatement(query);
-            System.out.println("TEST SPEC=" + specialisation.getSpecialisation() + specialisation.getSpecPrice());
-            ps.setString(1, specialisation.getSpecialisation());
-            ps.setNull(2, Types.NULL);
-            ps.setInt(3, specialisation.getSpecPrice());
-
-            ps.execute();
-            ps.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static ArrayList<Spec_list> getSpecialisations() {
-        String query = "SELECT * FROM spec_list;";
-        ArrayList<Spec_list> speclist = new ArrayList<Spec_list>();
-        Spec_list specIndividual = null;
-
-        try {
-            PreparedStatement ps = conn.prepareCall(query);
-            ResultSet results = ps.executeQuery();
-            while (results.next()) {
-
-                String specName = results.getString(1);
-                int doctorId = results.getInt(2);
-                int specPrice = results.getInt(3);
-
-                specIndividual = new Spec_list(specName, null, specPrice);
-                speclist.add(specIndividual);
-            }
-
-            for (Spec_list spec : speclist) {
-                System.out.println(spec.getSpecialisation());
-            }
-            results.close();
-            ps.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return speclist;
-    }
-
     public static ArrayList<Doctor> getDoctors() {
         String query = "SELECT * FROM doctor;";
         ArrayList<Doctor> docList = new ArrayList<Doctor>();
-        Doctor doc = null;
+        Doctor doc;
 
         try {
             PreparedStatement ps = conn.prepareCall(query);
@@ -339,9 +263,10 @@ public class DatabaseConnection {
                 String firstName = results.getString(2);
                 String lastName = results.getString(3);
                 String spec = results.getString(4);
-                String password = results.getString(5);
+                int price = results.getInt(5);
+                String password = results.getString(6);
 
-                doc = new Doctor(docId, firstName, lastName, spec, password);
+                doc = new Doctor(docId, firstName, lastName, spec, price, password);
                 docList.add(doc);
             }
             results.close();
@@ -354,7 +279,7 @@ public class DatabaseConnection {
     }
 
     public static void addDoctor(Doctor doctor) {
-        String query = "INSERT INTO doctor VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO doctor VALUES (?,?,?,?,?,?)";
 
         try {
             PreparedStatement ps = conn.prepareStatement(query);
@@ -363,7 +288,8 @@ public class DatabaseConnection {
             ps.setString(2, doctor.getFirstName());
             ps.setString(3, doctor.getLastName());
             ps.setString(4, doctor.getSpecialisation());
-            ps.setString(5, doctor.getPw());
+            ps.setInt(5, doctor.getVisitCost());
+            ps.setString(6, doctor.getPw());
 
             ps.execute();
             ps.close();
@@ -399,6 +325,53 @@ public class DatabaseConnection {
             ps.setString(5, medicalRecord.getDiagnosis());
             ps.setString(6, medicalRecord.getDescription());
             ps.setString(7, medicalRecord.getDrugs());
+
+            ps.execute();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addPatient(Patient patient) {
+        String query = "INSERT INTO patient VALUES (?,?,?,?,?,?,?,?,?,?)";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setInt(1, patient.getPatientId());
+            ps.setString(2, patient.getFirstname());
+            ps.setString(3, patient.getLastname());
+            ps.setString(4, patient.getGender());
+            ps.setString(5, patient.getAddress());
+            ps.setInt(6, patient.getPhone());
+            ps.setDate(7, patient.getBirthDate());
+            ps.setDate(8, new Date(patient.getRegDay().getTime()));
+            ps.setString(9, patient.getPassword());
+            ps.setInt(10, patient.getTotalCost());
+
+            ps.execute();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updatePatient(Patient patient) {
+        String query = "UPDATE patient SET first_name=?, last_name=?, gender=?, " +
+                "address=?, phone=?, birth_date=?, p_pw=? WHERE pat_id=?;";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString(1, patient.getFirstname());
+            ps.setString(2, patient.getLastname());
+            ps.setString(3, patient.getGender());
+            ps.setString(4, patient.getAddress());
+            ps.setInt(5, patient.getPhone());
+            ps.setDate(6, patient.getBirthDate());
+            ps.setString(7, patient.getPassword());
+            ps.setInt(8, patient.getPatientId());
 
             ps.execute();
             ps.close();

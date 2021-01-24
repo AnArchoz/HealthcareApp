@@ -4,28 +4,62 @@
 
 package UIClasses;
 
+import Model.Doctor;
 import Model.Patient;
 import com.sqlsamples.Controller;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 /**
- * @author unknown
+ * @author ANTO O ELNI
  */
 public class PatientView extends JPanel {
     private Controller controller;
-    private Patient patient;
 
     public PatientView(Controller controller, Patient patient) {
         this.controller = controller;
-        this.patient = patient;
         initComponents();
+        updateComponents(patient);
+        System.out.println(patient);
+    }
+
+    private void updateComponents(Patient patient) {
+        int patientID = patient.getPatientId();
+        String firstName = patient.getFirstname();
+        String lastName = patient.getLastname();
+        String address = patient.getAddress();
+        String gender = patient.getGender();
+        int phone = patient.getPhone();
+        Date birthDate = patient.getBirthDate();
+
+        Date regDate = new Date(patient.getRegDay().getTime());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        format.format(regDate);
+        ArrayList<Doctor> doctorInfo = controller.getDoctorInfo();
+        System.out.println(patient);
+
+        DefaultComboBoxModel<Doctor> model = new DefaultComboBoxModel<>();
+        for (Doctor doc : doctorInfo) {
+            model.addElement(doc);
+        }
+
+        firstNameField.setText(firstName);
+        lastNameField.setText(lastName);
+        addressField.setText(address);
+        genderField.setText(gender);
+        phoneField.setText("" + phone);
+        doctorListBox.setModel(model);
+        patientNameLbl.setText("" + patientID);
+        dateLbl.setText(birthDate.toString());
+        regDateLbl.setText("Registration date: " + regDate.toString());
     }
 
     private void saveInfo(ActionEvent e) {
-        int patientID = 0;
+        int patientID = Integer.parseInt(patientNameLbl.getText());
         String firstName = firstNameField.getText();
         String lastname = lastNameField.getText();
         String gender = genderField.getText();
@@ -38,7 +72,21 @@ public class PatientView extends JPanel {
         Patient patient = new Patient(patientID, firstName, lastname, gender, address, phoneNmbr,
                 birthDate, null, password, 0);
 
-        //DatabaseConnection.addPatient(patient);
+        controller.updatePatient(patient);
+    }
+
+    private void seeTimes(ActionEvent e) {
+        Doctor doc = (Doctor) doctorListBox.getSelectedItem();
+
+        if (doc != null) {
+            DefaultListModel<String> model = new DefaultListModel<>();
+            for (String time : doc.getFreeTimes()) {
+                model.addElement(time);
+            }
+            doctorTimeList.setModel(model);
+        }
+
+
     }
 
     private void initComponents() {
@@ -63,23 +111,20 @@ public class PatientView extends JPanel {
         phoneLbl = new JLabel();
         doctorListBox = new JComboBox();
         doctorListLbl = new JLabel();
-        specSearchLbl = new JLabel();
         scrollPane2 = new JScrollPane();
-        list1 = new JList();
-        specSearchField = new JTextField();
+        doctorTimeList = new JList();
         timesBtn = new JButton();
         selectedDoctorLbl = new JLabel();
-        availableTimeBox = new JComboBox();
         availableTimeLbl = new JLabel();
         makeAppBtn = new JButton();
         saveInfoBtn = new JButton();
 
         //======== this ========
         setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
-        EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing
+        EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing
         . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
         java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( )
-        { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () ))
+        { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () ))
         throw new RuntimeException( ); }} );
 
         //---- patientNameLbl ----
@@ -100,7 +145,7 @@ public class PatientView extends JPanel {
         regDateLbl.setText("Registration date");
 
         //---- passwordLbl ----
-        passwordLbl.setText("Password - 6 digits");
+        passwordLbl.setText("Password - 8 digits");
 
         //---- firstnameLbl ----
         firstnameLbl.setText("First name");
@@ -117,16 +162,14 @@ public class PatientView extends JPanel {
         //---- doctorListLbl ----
         doctorListLbl.setText("List of doctors");
 
-        //---- specSearchLbl ----
-        specSearchLbl.setText("Search specialisation");
-
         //======== scrollPane2 ========
         {
-            scrollPane2.setViewportView(list1);
+            scrollPane2.setViewportView(doctorTimeList);
         }
 
         //---- timesBtn ----
         timesBtn.setText("See available times");
+        timesBtn.addActionListener(e -> seeTimes(e));
 
         //---- selectedDoctorLbl ----
         selectedDoctorLbl.setText("Selected doctor");
@@ -146,38 +189,58 @@ public class PatientView extends JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup()
                 .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                        .addGroup(GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(42, 42, 42)
-                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(doctorListLbl, GroupLayout.Alignment.LEADING)
-                                .addComponent(doctorListBox, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
-                                .addGroup(GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup()
-                                        .addComponent(selectedDoctorLbl)
-                                        .addComponent(specSearchLbl)
-                                        .addComponent(specSearchField, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(timesBtn)
-                                        .addComponent(phoneField, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addGap(86, 86, 86)
+                    .addComponent(regDateLbl)
+                    .addGap(65, 65, 65)
+                    .addGroup(layout.createParallelGroup()
+                        .addComponent(dateLbl)
+                        .addComponent(patientNameLbl, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(birthdayField, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(26, 26, 26)
+                    .addGroup(layout.createParallelGroup()
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup()
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(16, 16, 16)
                                     .addGroup(layout.createParallelGroup()
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup()
+                                                .addComponent(genderField, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(phoneLbl, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup()
+                                                .addComponent(genderLbl)
+                                                .addComponent(phoneField, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(doctorListLbl)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addGap(1, 1, 1)
+                                                    .addComponent(selectedDoctorLbl)))
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(layout.createParallelGroup()
+                                        .addComponent(passwordLbl)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                                .addComponent(passwordField1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(addressLbl))
                                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(saveInfoBtn))
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(layout.createParallelGroup()
-                                                .addComponent(availableTimeBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(availableTimeLbl)
-                                                .addComponent(makeAppBtn)))))
-                                .addGroup(GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(phoneLbl)
-                                    .addGap(111, 111, 111)
-                                    .addComponent(addressLbl))
-                                .addComponent(genderField, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addGroup(GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGap(13, 13, 13)
+                                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(timesBtn)
+                                    .addGroup(layout.createParallelGroup()
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(47, 47, 47)
+                                            .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+                                            .addGap(6, 7, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(41, 41, 41)
+                                            .addComponent(makeAppBtn, GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))))
+                                .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup()
                                         .addComponent(firstNameField, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createSequentialGroup()
@@ -190,98 +253,74 @@ public class PatientView extends JPanel {
                                         .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(lastnameLbl)
-                                            .addGap(15, 15, 15))))
-                                .addComponent(genderLbl, GroupLayout.Alignment.LEADING))
+                                            .addGap(15, 15, 15)))
+                                    .addGap(0, 141, Short.MAX_VALUE)))
+                            .addGap(143, 143, 143))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(doctorListBox, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
                             .addGap(0, 0, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
-                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(regDateLbl)
-                                    .addGap(87, 87, 87)
-                                    .addGroup(layout.createParallelGroup()
-                                        .addComponent(patientNameLbl, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(birthdayField, GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(6, 6, 6)
-                                                .addComponent(dateLbl)))))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                        .addComponent(passwordLbl)
-                                        .addComponent(passwordField1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
-                                    .addGap(71, 71, 71)))))
-                    .addGap(60, 60, 60))
+                            .addGap(187, 187, 187)
+                            .addComponent(availableTimeLbl)
+                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup()
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(18, 18, 18)
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(regDateLbl)
+                        .addComponent(regDateLbl, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
                         .addComponent(patientNameLbl))
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addGap(18, 18, 18)
                     .addGroup(layout.createParallelGroup()
-                        .addComponent(dateLbl, GroupLayout.Alignment.TRAILING)
                         .addComponent(lastnameLbl)
-                        .addComponent(firstnameLbl))
+                        .addComponent(firstnameLbl)
+                        .addComponent(dateLbl))
                     .addGroup(layout.createParallelGroup()
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(firstNameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lastNameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup()
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(genderLbl)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(genderField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGap(8, 8, 8)
-                                    .addComponent(passwordLbl)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                                    .addComponent(passwordField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(4, 4, 4)
-                            .addComponent(birthdayField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addGap(64, 64, 64)))
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(phoneLbl)
-                        .addComponent(addressLbl))
-                    .addGroup(layout.createParallelGroup()
-                        .addGroup(layout.createSequentialGroup()
+                            .addGap(16, 16, 16))
+                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup()
-                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(phoneField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(16, 16, 16)
-                            .addComponent(saveInfoBtn)))
-                    .addGap(18, 18, 18)
-                    .addComponent(doctorListLbl)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(doctorListBox, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
+                            .addComponent(birthdayField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)))
                     .addGroup(layout.createParallelGroup()
-                        .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                        .addComponent(genderLbl)
+                        .addComponent(passwordLbl, GroupLayout.Alignment.TRAILING))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup()
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup()
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(specSearchLbl)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(specSearchField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(selectedDoctorLbl)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(timesBtn))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(availableTimeLbl)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(availableTimeBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(37, 37, 37)
-                                    .addComponent(makeAppBtn)))
-                            .addContainerGap(36, Short.MAX_VALUE))))
+                            .addComponent(genderField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(phoneLbl)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(phoneField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(passwordField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(saveInfoBtn))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(addressLbl)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
+                    .addGap(7, 7, 7)
+                    .addGroup(layout.createParallelGroup()
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(availableTimeLbl)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(scrollPane2, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(doctorListLbl)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(doctorListBox, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(selectedDoctorLbl)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(timesBtn)
+                                .addComponent(makeAppBtn))))
+                    .addContainerGap(2, Short.MAX_VALUE))
         );
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
@@ -307,13 +346,10 @@ public class PatientView extends JPanel {
     private JLabel phoneLbl;
     private JComboBox doctorListBox;
     private JLabel doctorListLbl;
-    private JLabel specSearchLbl;
     private JScrollPane scrollPane2;
-    private JList list1;
-    private JTextField specSearchField;
+    private JList doctorTimeList;
     private JButton timesBtn;
     private JLabel selectedDoctorLbl;
-    private JComboBox availableTimeBox;
     private JLabel availableTimeLbl;
     private JButton makeAppBtn;
     private JButton saveInfoBtn;
