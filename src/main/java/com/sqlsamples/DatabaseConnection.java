@@ -135,6 +135,7 @@ public class DatabaseConnection {
                 String lastname = results.getString(2);
                 Date birthDate = results.getDate(3);
 
+
                 patient = new Patient(id, firstname, lastname, null, null,
                         1231293, birthDate, null, null, 0);
             }
@@ -178,6 +179,104 @@ public class DatabaseConnection {
         }
 
         return app;
+    }
+
+    public static MedicalRecord getMedRecord(int patientId) {
+        String query = "EXECUTE getMedicalRecord @mc_pat_id=?";
+        MedicalRecord medRecord = null;
+
+        try {
+            CallableStatement cs = conn.prepareCall(query);
+            cs.setInt(1, patientId);
+
+            ResultSet results = cs.executeQuery();
+
+            if (!results.next()) {
+                JOptionPane.showMessageDialog(null, "No such patient! Idiot!");
+                return null;
+            } else {
+                int dr_id = results.getInt(2);
+                int appId = results.getInt(3);
+                String appDate = results.getString(4);
+                String diagnosis = results.getString(5);
+                String description = results.getString(6);
+                String drugs = results.getString(7);
+
+                medRecord = new MedicalRecord(patientId, dr_id, appId, appDate, diagnosis, description, drugs);
+            }
+
+            results.close();
+            cs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return medRecord;
+    }
+
+    public static ArrayList<String> getAllAppointments() {
+        String query = "SELECT * FROM appInfo;";
+        ArrayList<String> appList = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = conn.prepareCall(query);
+            ResultSet results = ps.executeQuery();
+            while (results.next()) {
+
+                String docFirstName = results.getString(1);
+                String docLastName = results.getString(2);
+                String appDate = results.getString(3);
+                String patFirstName = results.getString(4);
+                String patLastName = results.getString(5);
+
+                String appString = "Dr. " + docFirstName + " " + docLastName + ", meeting with " +
+                        patFirstName + " " + patLastName + " at " + appDate;
+
+                appList.add(appString);
+            }
+            results.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return appList;
+    }
+
+    public static ArrayList<String> getAllPatients(boolean patID) {
+        String query;
+        if (!patID)
+            query = "SELECT pat_id, first_name, last_name, total_cost FROM patient;";
+        else
+            query = "SELECT patient_id FROM appointment;";
+
+        ArrayList<String> patientList = new ArrayList<>();
+        try {
+            PreparedStatement ps = conn.prepareCall(query);
+            ResultSet results = ps.executeQuery();
+            while (results.next()) {
+                String patientString = "";
+                int patientId;
+                if (!patID) {
+                    patientId = results.getInt(1);
+                    String firstName = results.getString(2);
+                    String lastName = results.getString(3);
+                    int totalCost = results.getInt(4);
+                    patientString = firstName + " " + lastName + ", Medical ID: " + patientId + ", Total Cost: "
+                            + totalCost + ":-";
+                } else {
+                    patientId = results.getInt(1);
+                    patientString = "" + patientId;
+                }
+                patientList.add(patientString);
+            }
+            results.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return patientList;
     }
 
     public static void addSpecialisation(Spec_list specialisation) {
@@ -285,6 +384,26 @@ public class DatabaseConnection {
             ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "DON'T TELL ME WHAT TO DO");
+        }
+    }
+
+    public static void addMedicalRecord(MedicalRecord medicalRecord) {
+        String query = "INSERT INTO medical_record VALUES (?,?,?,?,?,?,?);";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setInt(1, medicalRecord.getPatientId());
+            ps.setInt(2, medicalRecord.getDoctorId());
+            ps.setInt(3, medicalRecord.getMrAppId());
+            ps.setString(4, medicalRecord.getAppDate());
+            ps.setString(5, medicalRecord.getDiagnosis());
+            ps.setString(6, medicalRecord.getDescription());
+            ps.setString(7, medicalRecord.getDrugs());
+
+            ps.execute();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
