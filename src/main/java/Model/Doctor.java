@@ -1,7 +1,7 @@
 package Model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class Doctor {
     private int id;
@@ -10,7 +10,7 @@ public class Doctor {
     private String specialisation;
     private String pw;
     private int visitCost;
-    private ArrayList<String> freeTimes = new ArrayList<>(
+    private LinkedList<String> freeTimes = new LinkedList<>(
             Arrays.asList("50 09:00 mon", "50 09:30 mon", "50 10:00 mon", "50 10:30 mon",
                     "50 09:00 tue", "50 09:30 tue", "50 10:00 tue", "50 10:30 tue",
                     "50 09:00 wed", "50 09:30 wed", "50 10:00 wed", "50 10:30 wed",
@@ -30,12 +30,16 @@ public class Doctor {
         return id;
     }
 
-    public ArrayList<String> getFreeTimes() {
+    public LinkedList<String> getFreeTimes() {
         return freeTimes;
     }
 
-    public void setFreeTimes(ArrayList<String> freeTimes) {
+    public void setFreeTimes(LinkedList<String> freeTimes) {
         this.freeTimes = freeTimes;
+    }
+
+    public void book(String date) {
+        freeTimes.remove(date);
     }
 
     public void setId(int id) {

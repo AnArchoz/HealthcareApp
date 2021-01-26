@@ -47,7 +47,7 @@ public class MedicalRecordView extends JPanel {
                 new MedicalRecord(patientId, doctorId, appId, appDate,
                         diagnosis, description, drugs);
 
-        controller.addMedicalRecord(medicalRecord);
+        controller.updateMedicalRecord(medicalRecord);
     }
 
     private void initComponents() {

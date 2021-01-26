@@ -122,6 +122,6 @@ public class Patient {
     }
 
     public void setTotalCost(int totalCost) {
-        this.totalCost = totalCost;
+        this.totalCost += totalCost;
     }
 }

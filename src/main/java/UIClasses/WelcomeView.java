@@ -19,11 +19,11 @@ public class WelcomeView extends JPanel {
     }
 
     private void login(ActionEvent e) {
-        controller.openView("login", null, -1);
+        controller.openView("login", null, -1, null);
     }
 
     private void signup(ActionEvent e) {
-        controller.openView("signup", null, -1);
+        controller.openView("signup", null, -1, null);
     }
 
     private void signupBTNActionPerformed(ActionEvent e) {

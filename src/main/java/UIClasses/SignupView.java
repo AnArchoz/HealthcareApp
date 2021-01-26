@@ -32,7 +32,7 @@ public class SignupView extends JPanel {
         Patient patient = new Patient(username, "", "", "", "",
                 0, new Date(0), timestamp, password, 0);
         controller.addPatient(patient);
-        controller.openView("patient", patient, username);
+        controller.openView("patient", patient, username, null);
     }
 
     private void initComponents() {

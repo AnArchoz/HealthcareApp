@@ -119,50 +119,49 @@ public class DatabaseConnection {
         return admin;
     }
 
-//    public static Appointment getFreeAppointments(int docid) {
-//        String query = "EXECUTE getAppointment @app_id =? ";
-//        Appointment app = null;
-//
-//        try {
-//            CallableStatement cs = conn.prepareCall(query);
-//            cs.setInt(1, id);
-//
-//            ResultSet results = cs.executeQuery();
-//
-//            if (!results.next()) {
-//                JOptionPane.showMessageDialog(null, "Wrong username and/or password!");
-//                return null;
-//            } else {
-//                int pat_id = results.getInt(1);
-//                int dr_id = results.getInt(2);
-//                String app_date = results.getString(3);
-//                Timestamp bookTime = results.getTimestamp(4);
-//                Date date = new Date(bookTime.getTime());
-//
-//                app = new Appointment(id, pat_id, dr_id, app_date, date);
-//            }
-//
-//            results.close();
-//            cs.close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return app;
-//    }
+    public static ArrayList<Appointment> getAppointments(int docID) {
+        String query = "EXECUTE getAppointment @doctor_id =? ";
+        Appointment app = null;
+        ArrayList<Appointment> appList = new ArrayList<>();
 
-    public static MedicalRecord getMedRecord(int patientId) {
-        String query = "EXECUTE getMedicalRecord @mc_pat_id=?";
+        try {
+            CallableStatement cs = conn.prepareCall(query);
+            cs.setInt(1, docID);
+
+            ResultSet results = cs.executeQuery();
+
+            while (results.next()) {
+                Integer pat_id = results.getInt(1);
+                int dr_id = results.getInt(2);
+                String app_date = results.getString(3);
+                Timestamp bookTime = results.getTimestamp(4);
+
+                app = new Appointment(0, pat_id, dr_id, app_date, bookTime);
+                appList.add(app);
+            }
+
+            results.close();
+            cs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return appList;
+    }
+
+    public static MedicalRecord getMedRecord(int patientId, String bookDate) {
+        String query = "EXECUTE getMedicalRecord @mc_pat_id=?, @mc_app_date=?;";
         MedicalRecord medRecord = null;
 
         try {
             CallableStatement cs = conn.prepareCall(query);
             cs.setInt(1, patientId);
+            cs.setString(2, bookDate);
 
             ResultSet results = cs.executeQuery();
 
             if (!results.next()) {
-                JOptionPane.showMessageDialog(null, "No such patient! Idiot!");
+                JOptionPane.showMessageDialog(null, "No prior record, creating new record.");
                 return null;
             } else {
                 int dr_id = results.getInt(2);
@@ -213,6 +212,7 @@ public class DatabaseConnection {
         return appList;
     }
 
+    // Boolean patient ID needed to select only patients with appointments, and therefore medical records
     public static ArrayList<String> getAllPatients(boolean patID) {
         String query;
         if (!patID)
@@ -238,7 +238,8 @@ public class DatabaseConnection {
                     patientId = results.getInt(1);
                     patientString = "" + patientId;
                 }
-                patientList.add(patientString);
+                if (patientId != 0)
+                    patientList.add(patientString);
             }
             results.close();
             ps.close();
@@ -313,11 +314,29 @@ public class DatabaseConnection {
         }
     }
 
-    public static void addMedicalRecord(MedicalRecord medicalRecord) {
-        String query = "INSERT INTO medical_record VALUES (?,?,?,?,?,?,?);";
+    public static void updateMedicalRecord(MedicalRecord medicalRecord) {
+        String query = "UPDATE medical_record SET diagnosis=?, description=?, drugs=? WHERE patient_id=? AND app_date_=?;";
         try {
             PreparedStatement ps = conn.prepareStatement(query);
 
+            ps.setString(1, medicalRecord.getDiagnosis());
+            ps.setString(2, medicalRecord.getDescription());
+            ps.setString(3, medicalRecord.getDrugs());
+            ps.setInt(4, medicalRecord.getPatientId());
+            ps.setString(5, medicalRecord.getAppDate());
+
+
+            ps.execute();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addMedicalRecord(MedicalRecord medicalRecord) {
+        String query = "INSERT INTO medical_record VALUES(?,?,?,?,?,?,?);";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, medicalRecord.getPatientId());
             ps.setInt(2, medicalRecord.getDoctorId());
             ps.setInt(3, medicalRecord.getMrAppId());
@@ -370,11 +389,66 @@ public class DatabaseConnection {
             ps.setString(4, patient.getAddress());
             ps.setInt(5, patient.getPhone());
             ps.setDate(6, patient.getBirthDate());
+            String password = patient.getPassword();
             ps.setString(7, patient.getPassword());
             ps.setInt(8, patient.getPatientId());
 
             ps.execute();
             ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void bookAppointment(Appointment app) {
+        String query = "INSERT INTO appointment VALUES(?, ?, ?, ?);";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, app.getPatientId());
+            ps.setInt(2, app.getDoctorId());
+            ps.setString(3, app.getAppDate());
+            ps.setTimestamp(4, app.getBookTime());
+
+            ps.execute();
+            ps.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static int getAppId(int patientID, String appDate) {
+        String query = "SELECT app_id FROM appointment WHERE patient_id =? AND app_date_ =?;";
+        int appID = 0;
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, patientID);
+            ps.setString(2, appDate);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next())
+                appID = rs.getInt(1);
+
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return appID;
+    }
+
+    public static void addDebt(int patientID, int visitCost) {
+        String query = "UPDATE PATIENT SET total_cost = total_cost +? WHERE pat_id=?;";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, visitCost);
+            ps.setInt(2, patientID);
+
+            ps.execute();
+            ps.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

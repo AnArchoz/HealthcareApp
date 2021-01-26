@@ -1,9 +1,6 @@
 package com.sqlsamples;
 
-import Model.AdminTable;
-import Model.Doctor;
-import Model.MedicalRecord;
-import Model.Patient;
+import Model.*;
 import UIClasses.*;
 
 import javax.swing.*;
@@ -37,7 +34,7 @@ public class Controller {
 
     }
 
-    public void openView(String view, Object user, int patientId) {
+    public void openView(String view, Object user, int patientId, String bookdate) {
         frame.getContentPane().removeAll();
         switch (view) {
             case "login":
@@ -53,7 +50,7 @@ public class Controller {
                 break;
             case "patient":
                 patientView = new PatientView(this, (Patient) user);
-                frame.setSize(450, 500);
+                frame.setSize(430, 400);
                 frame.add(patientView, BorderLayout.CENTER);
                 break;
             case "doctor":
@@ -68,7 +65,7 @@ public class Controller {
                 frame.add(adminView, BorderLayout.CENTER);
                 break;
             case "medical record":
-                MedicalRecord medRecord = DatabaseConnection.getMedRecord(patientId);
+                MedicalRecord medRecord = DatabaseConnection.getMedRecord(patientId, bookdate);
                 if (medRecord == null) {
                     medRecord = new MedicalRecord(patientId, 0, 0, "null for now",
                             "", "", "");
@@ -100,11 +97,11 @@ public class Controller {
         return DatabaseConnection.getAllPatients(patID);
     }
 
-    public MedicalRecord getMedicalRecord(int patientID) {
-        return DatabaseConnection.getMedRecord(patientID);
+    public void updateMedicalRecord(MedicalRecord medicalRecord) {
+        DatabaseConnection.updateMedicalRecord(medicalRecord);
     }
 
-    public void addMedicalRecord(MedicalRecord medicalRecord) {
+    public void addMedicalRecord(MedicalRecord medicalRecord){
         DatabaseConnection.addMedicalRecord(medicalRecord);
     }
 
@@ -118,6 +115,22 @@ public class Controller {
 
     public void updatePatient(Patient patient) {
         DatabaseConnection.updatePatient(patient);
+    }
+
+    public void bookAppointment(Appointment app) {
+        DatabaseConnection.bookAppointment(app);
+    }
+
+    public ArrayList<Appointment> getAppointments(int doctorID) {
+        return DatabaseConnection.getAppointments(doctorID);
+    }
+
+    public int getAppID(int patientID, String appDate) {
+        return DatabaseConnection.getAppId(patientID, appDate);
+    }
+
+    public void addDebt(int patientID, int visitCost) {
+        DatabaseConnection.addDebt(patientID, visitCost);
     }
 }
 
