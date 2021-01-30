@@ -1,13 +1,8 @@
 package Model;
 
-public class AdminTable extends User {
+public abstract class User {
     private int id;
     private String pw;
-
-    public AdminTable(int id, String pw) {
-        this.id = id;
-        this.pw = pw;
-    }
 
     public int getId() {
         return id;

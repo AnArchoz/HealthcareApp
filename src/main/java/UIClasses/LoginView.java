@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
  * @author unknown
  */
 public class LoginView extends JPanel {
-    private Controller controller;
+    private final Controller controller;
 
     public LoginView(Controller controller) {
         this.controller = controller;
@@ -28,21 +28,20 @@ public class LoginView extends JPanel {
         int username = Integer.parseInt(usernameField.getText());
         String password = new String(passwordField.getPassword());
 
-
         if (patientRadioBtn.isSelected()) {
-            Patient patient = DatabaseConnection.checkPatientLogin(username, password);
+            Patient patient = (Patient) DatabaseConnection.checkLogin(username, password, "patient");
 
             if (patient != null) {
                 controller.openView("patient", patient, patient.getPatientId(), null);
             }
         } else if (doctorRadioBtn.isSelected()) {
-            Doctor doctor = DatabaseConnection.checkDoctorLogin(username, password);
+            Doctor doctor = (Doctor) DatabaseConnection.checkLogin(username, password, "doctor");
 
             if (doctor != null) {
                 controller.openView("doctor", doctor, -1, null);
             }
         } else if (adminRadioBtn.isSelected()) {
-            AdminTable admin = DatabaseConnection.checkAdminLogin(username, password);
+            AdminTable admin = (AdminTable) DatabaseConnection.checkLogin(username, password, "admin_table");
 
             if (admin != null) {
                 controller.openView("admin", admin, -1, null);

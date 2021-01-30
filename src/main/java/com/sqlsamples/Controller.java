@@ -50,7 +50,7 @@ public class Controller {
                 break;
             case "patient":
                 patientView = new PatientView(this, (Patient) user);
-                frame.setSize(430, 400);
+                frame.setSize(430, 450);
                 frame.add(patientView, BorderLayout.CENTER);
                 break;
             case "doctor":
@@ -121,7 +121,7 @@ public class Controller {
         DatabaseConnection.bookAppointment(app);
     }
 
-    public ArrayList<Appointment> getAppointments(int doctorID) {
+    public ArrayList<Appointment> getDoctorAppointments(int doctorID) {
         return DatabaseConnection.getAppointments(doctorID);
     }
 

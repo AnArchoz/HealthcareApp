@@ -19,9 +19,12 @@ public class Appointment {
 
     }
 
-    public Appointment(int appId, int patientId, int doctorId, String appDate, Timestamp bookTime) {
+    public Appointment(int appId, Integer patientId, int doctorId, String appDate, Timestamp bookTime) {
         this.appId = appId;
-        this.patientId = patientId;
+        if (patientId == null)
+            this.patientId = 0;
+        else
+            this.patientId = patientId;
         this.doctorId = doctorId;
         this.appDate = appDate;
         this.bookTime = bookTime;

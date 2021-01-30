@@ -3,7 +3,7 @@ package Model;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-public class Doctor {
+public class Doctor extends User {
     private int id;
     private String firstName;
     private String lastName;
@@ -17,6 +17,14 @@ public class Doctor {
                     "50 09:00 thu", "50 09:30 thu", "50 10:00 thu", "50 10:30 thu",
                     "50 09:00 fri", "50 09:30 fri", "50 10:00 fri", "50 10:30 fri"));
 
+    public Doctor(int id, String firstName, String lastName, String specialisation, int visitCost, String pw) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.specialisation = specialisation;
+        this.pw = pw;
+        this.visitCost = visitCost;
+    }
 
     public int getVisitCost() {
         return visitCost;
@@ -80,15 +88,6 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + ", specialisation: " + specialisation + ", visit cost: " + visitCost;
-    }
-
-    public Doctor(int id, String firstName, String lastName, String specialisation, int visitCost, String pw) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.specialisation = specialisation;
-        this.pw = pw;
-        this.visitCost = visitCost;
+        return firstName + " " + lastName + ", " + specialisation + ", visit cost: " + visitCost;
     }
 }

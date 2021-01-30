@@ -9,8 +9,8 @@ import Model.Doctor;
 import Model.MedicalRecord;
 import Model.Patient;
 import com.sqlsamples.Controller;
+import wrapper.BoundsPopupMenuListener;
 
-import javax.print.Doc;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.sql.Date;
@@ -36,7 +36,7 @@ public class PatientView extends JPanel {
 
     private void updateComponents(Patient patient) {
         Calendar todaysDate = Calendar.getInstance(TimeZone.getDefault());
-        int currentDay = todaysDate.get(Calendar.DAY_OF_WEEK);
+        //int currentDay = todaysDate.get(Calendar.DAY_OF_WEEK);
         // TODO: ENABLE BEFORE PRESENTATION LMAO
         //boolean isFriday = (currentDay == Calendar.FRIDAY);
         //if (!isFriday) {
@@ -57,12 +57,20 @@ public class PatientView extends JPanel {
         format.format(regDate);
 
         ArrayList<Doctor> doctorInfo = controller.getDoctorInfo();
+        ArrayList<Appointment> appList;
         System.out.println(patient);
 
         DefaultComboBoxModel<Doctor> model = new DefaultComboBoxModel<>();
         for (Doctor doc : doctorInfo) {
             model.addElement(doc);
+            appList = controller.getDoctorAppointments(doc.getId());
+            for (Appointment app : appList)
+                doc.book(app.getAppDate());
         }
+
+        BoundsPopupMenuListener listener = new BoundsPopupMenuListener(true, false);
+        doctorListBox.addPopupMenuListener(listener);
+
         docModel = model;
         firstNameField.setText(firstName);
         lastNameField.setText(lastName);

@@ -13,7 +13,6 @@ public class DatabaseConnection {
         String connectionUrl = "jdbc:sqlserver://localhost:1434;databaseName=master;user=bla;password=Hej12345";
 
         try {
-            // Load SQL Server JDBC driver and establish connection.
             System.out.print("Connecting to SQL Server ... ");
             conn = DriverManager.getConnection(connectionUrl);
             if (conn != null) {
@@ -23,13 +22,11 @@ public class DatabaseConnection {
             System.out.println();
             e.printStackTrace();
         }
-
-
     }
 
-    public static Doctor checkDoctorLogin(int id, String password) {
-        String query = "SELECT * FROM DOCTOR WHERE d_id=? AND d_pw=?";
-        Doctor doctor = null;
+    public static User checkLogin(int id, String password, String userType) {
+        User user = null;
+        String query = "SELECT * FROM " + userType + " WHERE id=? AND pw=?";
 
         try {
             PreparedStatement ps = conn.prepareStatement(query);
@@ -37,78 +34,38 @@ public class DatabaseConnection {
             ps.setString(2, password);
 
             ResultSet results = ps.executeQuery();
+            String firstName = "";
+            String lastName = "";
 
             if (!results.next()) {
                 JOptionPane.showMessageDialog(null, "Wrong username and/or password!");
                 return null;
             } else {
-                String firstname = results.getString(2);
-                String lastname = results.getString(3);
-                String spec = results.getString(4);
-                int visitCost = results.getInt(5);
-                doctor = new Doctor(id, firstname, lastname, spec, visitCost, password);
-            }
-            results.close();
-            ps.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return doctor;
-    }
+                switch (userType) {
+                    case "admin_table":
+                        user = (User) new AdminTable(id, password);
+                        break;
+                    case "patient":
+                        firstName = results.getString(2);
+                        lastName = results.getString(3);
+                        String gender = results.getString(4);
+                        String address = results.getString(5);
+                        int phone = results.getInt(6);
+                        Date birthDate = results.getDate(7);
+                        Timestamp regDay = results.getTimestamp(8);
+                        int totalCost = results.getInt(10);
 
-    public static Patient checkPatientLogin(int id, String password) {
-        String query = "SELECT * FROM PATIENT WHERE pat_id=? AND p_pw=?";
-        Patient patient = null;
+                        user = new Patient(id, firstName, lastName, gender, address,
+                                phone, birthDate, regDay, password, totalCost);
+                        break;
+                    case "doctor":
+                        firstName = results.getString(2);
+                        lastName = results.getString(3);
+                        String spec = results.getString(4);
+                        int visitCost = results.getInt(5);
+                        user = new Doctor(id, firstName, lastName, spec, visitCost, password);
 
-        try {
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setInt(1, id);
-            ps.setString(2, password);
-
-            ResultSet results = ps.executeQuery();
-
-            if (!results.next()) {
-                JOptionPane.showMessageDialog(null, "Wrong username and/or password!");
-                return null;
-            } else {
-                String firstname = results.getString(2);
-                String lastname = results.getString(3);
-                String gender = results.getString(4);
-                String address = results.getString(5);
-                int phone = results.getInt(6);
-                Date birthDate = results.getDate(7);
-                Timestamp regDay = results.getTimestamp(8);
-                int totalCost = results.getInt(10);
-
-                patient = new Patient(id, firstname, lastname, gender, address,
-                        phone, birthDate, regDay, password, 0);
-            }
-
-            results.close();
-            ps.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return patient;
-    }
-
-    public static AdminTable checkAdminLogin(int id, String password) {
-        String query = "SELECT * FROM ADMIN_TABLE WHERE a_id=? AND ad_pw=?";
-        AdminTable admin = null;
-
-        try {
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setInt(1, id);
-            ps.setString(2, password);
-
-            ResultSet results = ps.executeQuery();
-
-            if (!results.next()) {
-                JOptionPane.showMessageDialog(null, "Wrong username and/or password!");
-                return null;
-            } else {
-                admin = new AdminTable(id, password);
+                }
             }
             results.close();
             ps.close();
@@ -116,7 +73,7 @@ public class DatabaseConnection {
             e.printStackTrace();
         }
 
-        return admin;
+        return user;
     }
 
     public static ArrayList<Appointment> getAppointments(int docID) {
@@ -300,7 +257,7 @@ public class DatabaseConnection {
     }
 
     public static void deleteDoctor(Doctor doctor) {
-        String query = "DELETE FROM doctor WHERE d_id=?;";
+        String query = "DELETE FROM doctor WHERE id=?;";
         int doctorID = doctor.getId();
 
         try {
@@ -378,7 +335,7 @@ public class DatabaseConnection {
 
     public static void updatePatient(Patient patient) {
         String query = "UPDATE patient SET first_name=?, last_name=?, gender=?, " +
-                "address=?, phone=?, birth_date=?, p_pw=? WHERE pat_id=?;";
+                "address=?, phone=?, birth_date=?, pw=? WHERE id=?;";
 
         try {
             PreparedStatement ps = conn.prepareStatement(query);
@@ -405,7 +362,10 @@ public class DatabaseConnection {
 
         try {
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setInt(1, app.getPatientId());
+            if (app.getPatientId() == 0)
+                ps.setNull(1, app.getAppId());
+            else
+                ps.setInt(1, app.getPatientId());
             ps.setInt(2, app.getDoctorId());
             ps.setString(3, app.getAppDate());
             ps.setTimestamp(4, app.getBookTime());
@@ -439,7 +399,7 @@ public class DatabaseConnection {
     }
 
     public static void addDebt(int patientID, int visitCost) {
-        String query = "UPDATE PATIENT SET total_cost = total_cost +? WHERE pat_id=?;";
+        String query = "UPDATE PATIENT SET total_cost = total_cost +? WHERE id=?;";
 
         try {
             PreparedStatement ps = conn.prepareStatement(query);

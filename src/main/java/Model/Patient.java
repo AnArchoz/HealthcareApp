@@ -3,7 +3,7 @@ package Model;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-public class Patient {
+public class Patient extends User {
     private int patientId;
     private String firstname;
     private String lastname;
