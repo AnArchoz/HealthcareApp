@@ -4,10 +4,13 @@
 
 package UIClasses;
 
+import Model.AdminTable;
 import Model.Doctor;
 import Model.MedicalRecord;
+import Model.User;
 import com.sqlsamples.Controller;
 
+import javax.print.Doc;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
@@ -16,11 +19,14 @@ public class MedicalRecordView extends JPanel {
     private Controller controller;
     private MedicalRecord record;
     private Doctor doctor;
+    private User user;
 
-    public MedicalRecordView(Controller controller, MedicalRecord record, Doctor doctor) {
+    public MedicalRecordView(Controller controller, MedicalRecord record, User user) {
         this.controller = controller;
         this.record = record;
-        this.doctor = doctor;
+        this.user = user;
+        if (user instanceof Doctor)
+            this.doctor = (Doctor) user;
         initComponents();
         updateComponents(record);
     }
@@ -31,6 +37,8 @@ public class MedicalRecordView extends JPanel {
         drugField.setText(record.getDrugs());
         dateLabel.setText(record.getAppDate());
         patNameLabel.setText("" + record.getPatientId());
+        if(user instanceof AdminTable)
+            saveRecordBtn.setEnabled(false);
     }
 
     private void saveRecord(ActionEvent e) {

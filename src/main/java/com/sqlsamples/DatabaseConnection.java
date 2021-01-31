@@ -107,7 +107,7 @@ public class DatabaseConnection {
     }
 
     public static MedicalRecord getMedRecord(int patientId, String bookDate) {
-        String query = "EXECUTE getMedicalRecord @mc_pat_id=?, @mc_app_date=?;";
+        String query = "EXECUTE getMedicalRecord @mc_id=?, @mc_app_date=?;";
         MedicalRecord medRecord = null;
 
         try {
@@ -169,13 +169,40 @@ public class DatabaseConnection {
         return appList;
     }
 
+    public static ArrayList<String> getPatients() {
+        String query = "EXECUTE getPatients;";
+
+        ArrayList<String> patientList = new ArrayList<>();
+
+        try {
+            CallableStatement cs = conn.prepareCall(query);
+            ResultSet rs = cs.executeQuery();
+
+            while (rs.next()) {
+                int patientId = rs.getInt(1);
+                String firstName = rs.getString(2);
+                String lastName = rs.getString(3);
+                int totalCost = rs.getInt(4);
+
+                String patientString = firstName + " " + lastName + ", Medical ID: " + patientId + ", Total Cost: "
+                        + totalCost + ":-";
+
+                patientList.add(patientString);
+            }
+
+            cs.close();
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return patientList;
+    }
+
     // Boolean patient ID needed to select only patients with appointments, and therefore medical records
-    public static ArrayList<String> getAllPatients(boolean patID) {
+    public static ArrayList<String> getAllPatients() {
         String query;
-        if (!patID)
-            query = "SELECT pat_id, first_name, last_name, total_cost FROM patient;";
-        else
-            query = "SELECT patient_id FROM appointment;";
+        query = "SELECT patient_id FROM appointment;";
 
         ArrayList<String> patientList = new ArrayList<>();
         try {
@@ -184,17 +211,8 @@ public class DatabaseConnection {
             while (results.next()) {
                 String patientString = "";
                 int patientId;
-                if (!patID) {
-                    patientId = results.getInt(1);
-                    String firstName = results.getString(2);
-                    String lastName = results.getString(3);
-                    int totalCost = results.getInt(4);
-                    patientString = firstName + " " + lastName + ", Medical ID: " + patientId + ", Total Cost: "
-                            + totalCost + ":-";
-                } else {
-                    patientId = results.getInt(1);
-                    patientString = "" + patientId;
-                }
+                patientId = results.getInt(1);
+                patientString = "" + patientId;
                 if (patientId != 0)
                     patientList.add(patientString);
             }
@@ -412,5 +430,42 @@ public class DatabaseConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String getPatientInfo(int patientID) {
+        String query = "EXECUTE getPatientInfo @id =?";
+        String patientString = "";
+
+        try {
+            CallableStatement cs = conn.prepareCall(query);
+            cs.setInt(1, patientID);
+            ResultSet rs = cs.executeQuery();
+
+            if (rs.next()) {
+                String firstName = rs.getString(1);
+                String lastName = rs.getString(2);
+                String birthDate = rs.getDate(3).toString();
+                String gender = rs.getString(4);
+                String address = rs.getString(5);
+                String phoneString = "0" + rs.getInt(6);
+                Timestamp regDate = rs.getTimestamp(7);
+                Date reg = new Date(regDate.getTime());
+                String regString = reg.toString();
+                int totalCost = rs.getInt(8);
+
+                patientString = "Full name: " + firstName + " " + lastName + ", Medical ID: " + patientID
+                        + "\n Date of birth: " + birthDate + ", Gender: " + gender
+                        + "\n address: " + address + ", Phone number: " + phoneString
+                        + "\n Registration date: " + regString + " Total Cost: " + +totalCost + ":-";
+
+            }
+
+            cs.close();
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return patientString;
     }
 }

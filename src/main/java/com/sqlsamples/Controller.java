@@ -8,8 +8,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Controller {
-    private ArrayList<Doctor> docList;
-    private Doctor doctor;
     JFrame frame;
     LoginView loginView;
     AdminView adminView;
@@ -34,7 +32,7 @@ public class Controller {
 
     }
 
-    public void openView(String view, Object user, int patientId, String bookdate) {
+    public void openView(String view, User user, int patientId, String bookdate) {
         frame.getContentPane().removeAll();
         switch (view) {
             case "login":
@@ -54,14 +52,14 @@ public class Controller {
                 frame.add(patientView, BorderLayout.CENTER);
                 break;
             case "doctor":
-                doctorView = new DoctorView(this, (Doctor) user, DatabaseConnection.getAllPatients(true));
+                doctorView = new DoctorView(this, (Doctor) user, DatabaseConnection.getAllPatients());
                 frame.setSize(400, 300);
                 frame.add(doctorView, BorderLayout.CENTER);
                 break;
             case "admin":
-                docList = DatabaseConnection.getDoctors();
+                ArrayList<Doctor> docList = DatabaseConnection.getDoctors();
                 adminView = new AdminView(this, (AdminTable) user, docList);
-                frame.setSize(600, 400);
+                frame.setSize(650, 400);
                 frame.add(adminView, BorderLayout.CENTER);
                 break;
             case "medical record":
@@ -70,7 +68,7 @@ public class Controller {
                     medRecord = new MedicalRecord(patientId, 0, 0, "null for now",
                             "", "", "");
                 }
-                medicalRecordView = new MedicalRecordView(this, medRecord, (Doctor) user);
+                medicalRecordView = new MedicalRecordView(this, medRecord, user);
 
                 frame.setSize(400, 300);
                 frame.add(medicalRecordView, BorderLayout.CENTER);
@@ -93,15 +91,15 @@ public class Controller {
         return DatabaseConnection.getAllAppointments();
     }
 
-    public ArrayList<String> getAllPatients(boolean patID) {
-        return DatabaseConnection.getAllPatients(patID);
+    public ArrayList<String> getPatients() {
+        return DatabaseConnection.getPatients();
     }
 
     public void updateMedicalRecord(MedicalRecord medicalRecord) {
         DatabaseConnection.updateMedicalRecord(medicalRecord);
     }
 
-    public void addMedicalRecord(MedicalRecord medicalRecord){
+    public void addMedicalRecord(MedicalRecord medicalRecord) {
         DatabaseConnection.addMedicalRecord(medicalRecord);
     }
 

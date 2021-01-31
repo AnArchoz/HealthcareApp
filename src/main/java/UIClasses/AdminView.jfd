@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :12:12:p, par l {seq {par l {seq {par l {seq l {comp employeeLabel:::p:102:p, space :::p, comp addSpecLabel:::p:186:p, space :p:33:p, comp idLabel:::p::p}, seq l {par l {seq l {comp firstnameField:::p:102:p, space :::p, comp surnameField:::p:93:p}, seq l {comp doctorPasswordField:::p:108:p, space s:::p, comp addDoctorBtn:::p::p}, comp passwordLabel::l:p::p, par t:l::p {comp deleteDoctorBtn::l::154:x, comp doctorListBox::l::154:x}, seq l {space :p:9:p, comp removeDoctorLabel:::p::p}}, space :p:49:p, par l {seq {comp appListBtn:::p::p, space u:::p, comp patientListBtn:::p::p}, seq l {space :p:17:p, comp scrollPane1:::p:225:p}}}}, space :0:35:x}, seq {par l {comp addDoctorField::l:p:102:p, comp firstnameLabel::l:p::p}, space :::p, par l {seq {comp lastnameLabel:::p::p, space :0:386:x}, seq {comp addSpecField:::p:83:p, space :::p, comp addCostField:::p:91:p, space ::35:x, comp patientIdField:::p:79:p, space :::p, comp medRecBtn:::p::p}}}}, space :p:25:p}, seq l {space :0:0:x, comp listLabel:::p::p, space :::p}}}}"
-			"$verticalGroup": "par l {seq l {space :::x, par b {comp idLabel::b:p:16:p, comp addSpecLabel::b:p::p, comp employeeLabel::b:p::p}, space :::p, par b {comp addCostField::b:p::p, comp addSpecField::b:p::p, comp medRecBtn::b:p::p, comp patientIdField::b:p::p, comp addDoctorField::b:p::p}, space :::p, par b {comp firstnameLabel::b:p::p, comp lastnameLabel::b:p::p}, par l {seq {space :p:1:p, comp listLabel:::p::p, space u:::p, par b {comp appListBtn::b:p::p, comp patientListBtn::b:p::p}}, seq l {space :::p, par b {comp firstnameField::b:p::p, comp surnameField::b:p::p}, space u:::p, comp passwordLabel:::p::p}}, space :::x, par l {seq {space :p:6:p, par b {comp doctorPasswordField::b:p::p, comp addDoctorBtn::b:p::p}, space :p:43:p, comp removeDoctorLabel:::p::p, space :::p, comp doctorListBox:::p:36:p, space :::p, comp deleteDoctorBtn:::p::p}, comp scrollPane1:::p:189:p}, space :p:97:p}}"
+			"$horizontalGroup": "par l {seq l {space :12:12:p, par l {seq {comp employeeLabel:::p:102:p, space :::p, comp addSpecLabel:::p:186:p, space :p:33:p, comp idLabel:::p::p, space :0:0:x}, seq t {par l {seq l {comp doctorPasswordField:::p:108:p, space s:::p, comp addDoctorBtn:::p::p}, comp passwordLabel::l:p::p, seq l {par t:::p {comp deleteDoctorBtn::l::154:x, comp doctorListBox::l::154:x}, par l {seq {space :p:27:p, par l {comp label2:::p::p, comp label1:::p::p}}, seq l {space s:::p, comp patientInfoBtn:::p::p}}}, seq l {space :p:9:p, comp removeDoctorLabel:::p::p}}, space s:::p, par l {seq {comp appListBtn:::p::p, space s:::p, comp patientListBtn:::p::p}, comp scrollPane1:::p:225:p}, space ::33:x}, seq t {par t {seq {comp firstnameField:::p:102:p, space :::p, comp surnameField:::p:93:p, space ::40:x, comp listLabel:::p::p}, seq {par l {comp addDoctorField::l:p:102:p, comp firstnameLabel::l:p::p}, space :::p, par l {seq {comp lastnameLabel:::p::p, space :0:0:x}, seq {comp addSpecField:::p:83:p, space :::p, comp addCostField:::p:91:p, space ::10:x, comp patientIdField:::p:79:p, space :::p, comp medRecBtn:::p::p}}}}, space :p:25:p}}}}"
+			"$verticalGroup": "par l {seq l {space ::9:x, par b {comp idLabel::b:p:16:p, comp addSpecLabel::b:p::p, comp employeeLabel::b:p::p}, space :::p, par b {comp addCostField::b:p::p, comp addSpecField::b:p::p, comp medRecBtn::b:p::p, comp patientIdField::b:p::p, comp addDoctorField::b:p::p}, par b {comp firstnameLabel::b:p::p, comp lastnameLabel::b:p::p}, space :::p, par t {seq {par b {comp firstnameField::b:p::p, comp surnameField::b:p::p, comp listLabel::b:p::p}, space u:::p, comp passwordLabel:::p::p}, par b {comp appListBtn::b:p::p, comp patientListBtn::b:p::p}}, space ::9:x, par l {seq {par b {comp doctorPasswordField::b:p::p, comp addDoctorBtn::b:p::p}, space :p:43:p, comp removeDoctorLabel:::p::p, space :::p, par l {seq {comp doctorListBox:::p:36:p, space :::p, par b {comp deleteDoctorBtn::b:p::p, comp patientInfoBtn::b:p::p}}, seq {comp label1:::p::p, space :::p, comp label2:::p::p}}}, comp scrollPane1:::p:189:p}, space :p:21:p}}"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JTextField" ) {
@@ -95,9 +95,22 @@ new FormModel {
 					name: "appPatientList"
 				} )
 			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "patientInfoBtn"
+				"text": "Patient info"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "getPatientInfo", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "All info from"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "Selected patient"
+			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 5, 5 )
-			"size": new java.awt.Dimension( 585, 360 )
+			"location": new java.awt.Point( 5, 10 )
+			"size": new java.awt.Dimension( 560, 360 )
 		} )
 	}
 }

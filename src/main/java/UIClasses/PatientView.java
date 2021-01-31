@@ -101,6 +101,8 @@ public class PatientView extends JPanel {
             password = new String(passwordField1.getPassword());
         String address = addressField.getText();
 
+        dateLbl.setText(birthDateString);
+
         Patient patient = new Patient(patientID, firstName, lastname, gender, address, phoneNmbr,
                 birthDate, null, password, 0);
 
